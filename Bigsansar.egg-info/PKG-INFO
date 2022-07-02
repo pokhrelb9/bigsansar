@@ -1,0 +1,38 @@
+Metadata-Version: 2.1
+Name: Bigsansar
+Version: 0.0.4
+Summary: Build one in minutes with bigsansar - a visual site building tool!
+Home-page: https://youtube.com/bigsansar
+Author: Bikash Pokhrel
+Author-email: admin@bigsansar.com
+License: UNKNOWN
+Project-URL: Bug Tracker, https://github.com/pokhrelb9/pokhrelb9/issues
+Keywords: python,django host,bigsansar,django,django sites framework,django flatpages
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.6
+Description-Content-Type: text/markdown
+License-File: LICENSE
+
+# Example Package
+
+This is a simple example package. You can use
+[bigsansar](https://bigsansar.com)
+to write your content.
+
+[youtube](https://youtube.com/bigsansar)
+
+install 'bigsansar.apps.BigsansarConfig' app in to django 
+
+then
+
+use this commands 
+
+python3 manage.py createuser 
+
+and get 1000 test user 
+
+default password : bp787898
+
