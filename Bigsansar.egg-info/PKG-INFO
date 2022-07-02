@@ -1,12 +1,12 @@
 Metadata-Version: 2.1
 Name: Bigsansar
-Version: 0.0.4
+Version: 0.0.5
 Summary: Build one in minutes with bigsansar - a visual site building tool!
-Home-page: https://youtube.com/bigsansar
+Home-page: https://bigsansar.com
 Author: Bikash Pokhrel
-Author-email: admin@bigsansar.com
+Author-email: bigsansaroffice@gmail.com
 License: UNKNOWN
-Project-URL: Bug Tracker, https://github.com/pokhrelb9/pokhrelb9/issues
+Project-URL: Bug Tracker, https://github.com/pokhrelb9/bigsansar/issues
 Keywords: python,django host,bigsansar,django,django sites framework,django flatpages
 Platform: UNKNOWN
 Classifier: Programming Language :: Python :: 3
