@@ -1,3 +1,19 @@
+Metadata-Version: 2.1
+Name: Bigsansar
+Version: 0.0.7
+Summary: Build one in minutes with bigsansar - a visual site building tool!
+Home-page: https://bigsansar.com
+Author: Bikash Pokhrel
+Author-email: bigsansaroffice@gmail.com
+Project-URL: Bug Tracker, https://github.com/pokhrelb9/bigsansar/issues
+Keywords: python,django host,bigsansar,django,django sites framework,django flatpages
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.6
+Description-Content-Type: text/markdown
+License-File: LICENSE
+
 
 # How to get Bigsansar
 
