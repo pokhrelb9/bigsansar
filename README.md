@@ -30,6 +30,10 @@ Type `bigsansar init` command for setup server .
 go to `www` path and open `settings.py` file then add `bigsansar.apps.BigsansarConfig`  in to 
 `INSTALLED_APPS = []` .
 
+## For Virtualhost middleware
+go to `www` path and open `settings.py` file then add `bigsansar.core.host.VirtualHostMiddleware`  in to top of 
+`MIDDLEWARE = []` .
+
 ## Some usefull commands:
 
 `python3 manage.py createuser` - get unlimited users.

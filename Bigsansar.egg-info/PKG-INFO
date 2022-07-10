@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: Bigsansar
-Version: 0.0.7
+Version: 0.0.8
 Summary: Build one in minutes with bigsansar - a visual site building tool!
 Home-page: https://bigsansar.com
 Author: Bikash Pokhrel
@@ -45,6 +45,10 @@ Type `bigsansar init` command for setup server .
 # After you get it
 go to `www` path and open `settings.py` file then add `bigsansar.apps.BigsansarConfig`  in to 
 `INSTALLED_APPS = []` .
+
+## For Virtualhost middleware
+go to `www` path and open `settings.py` file then add `bigsansar.core.host.VirtualHostMiddleware`  in to top of 
+`MIDDLEWARE = []` .
 
 ## Some usefull commands:
 
