@@ -1,4 +1,7 @@
 import argparse
+from bigsansar.core.init import initsetup
+
+
 class root:
 
     def __init__(self):
@@ -10,7 +13,7 @@ class root:
     def execute(self):
 
         if self.args.init == 'init':
-            exit()
+            return initsetup()
 
         else:
             print('usage: bigsansar --help')
