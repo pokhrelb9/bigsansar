@@ -24,13 +24,16 @@ You can also download a [gzipped tarball](https://pypi.org/project/Bigsansar/#fi
 This archive is updated every time we commit code.
 
 # After you install bigsansar
-Type `bigsansar init` command for setup server .
+Type `bigsansar init` command for **automatically** setup server . 
 
-# After you get it
+# For manually setup
+
+### After you get it
+
 go to `www` path and open `settings.py` file then add `bigsansar.apps.BigsansarConfig`  in to 
 `INSTALLED_APPS = []` .
 
-## For Virtualhost middleware
+### For Virtualhost middleware
 go to `www` path and open `settings.py` file then add `bigsansar.core.host.VirtualHostMiddleware`  in to top of 
 `MIDDLEWARE = []` .
 

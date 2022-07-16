@@ -4,15 +4,55 @@ def initsetup():
 
     cmd = 'django-admin startproject www .'
     createfile = 'VirtualHost.py'
-    get_content = 'virtual_hosts = {"test.com:8000": "root.urls", "example.com:8000": "ex.urls", }'
-    print('please wait...')
+    get_content = "virtual_hosts = {" \
+                  "\n   'test.com:8000': 'root.urls'," \
+                  "\n   'example.com:8000': 'ex.urls'," \
+                  "\n}"
 
+    print('creating a server .............')
+    os.system(cmd)
+
+    print('please wait...')
     print('we are creating files...')
     f = open(createfile, "w")
     print(f)
     f.write(get_content)
     f.close()
-    print('creating a server .............')
-    os.system(cmd)
-    print('cuccessfully created ...')
-    print('finished...')
+
+    word = 'INSTALLED_APPS'
+    middletext = 'MIDDLEWARE = ['
+    with open('www/settings.py', 'r') as fp:
+        # read all lines in a list
+        lines = fp.readlines()
+        count = 0
+        for line in lines:
+            # check if string present on a current line
+            if line.find(word) != -1:
+                count += 1
+                print('Installing Module in to', word)
+                x = lines.index(line) + count
+                print('Finding the Line Number:', x)
+                print('Inserting bigsansar module in to', line)
+
+                code = "    'bigsansar.apps.BigsansarConfig'," \
+                       "\n"
+
+                lines.insert(x, code)
+
+            elif line.find(middletext) != -1:
+
+                print('Reading the lines', middletext)
+                xy = lines.index(line) + 1
+                print('Finding the Line Number:', xy)
+                print('Inserting bigsansar virtualhost middleware  in to', line)
+
+                middlecode = "    'bigsansar.core.host.VirtualHostMiddleware'," \
+                             "\n"
+                lines.insert(xy, middlecode)
+
+        f = open('www/settings.py', 'w')
+        contents = "".join(lines)
+        f.write(contents)
+        f.close()
+
+        print('Finished')
