@@ -21,10 +21,14 @@ def initsetup():
 
     word = 'INSTALLED_APPS'
     middletext = 'MIDDLEWARE = ['
+    hostallow = 'ALLOWED_HOSTS = []'
+
     with open('www/settings.py', 'r') as fp:
         # read all lines in a list
         lines = fp.readlines()
         count = 0
+        f = open('www/settings.py', 'w')
+
         for line in lines:
             # check if string present on a current line
             if line.find(word) != -1:
@@ -50,7 +54,16 @@ def initsetup():
                              "\n"
                 lines.insert(xy, middlecode)
 
-        f = open('www/settings.py', 'w')
+            elif line.find(hostallow) != -1:
+                xyz = lines.index(line)
+
+                # delete lines
+                del lines[xyz]
+
+                hostcode = "ALLOWED_HOSTS = ['*']" \
+                           "\n"
+                lines.insert(xyz, hostcode)
+
         contents = "".join(lines)
         f.write(contents)
         f.close()
