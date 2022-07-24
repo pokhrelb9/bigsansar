@@ -12,6 +12,7 @@ def initsetup():
         print('error')
 
     else:
+
         createfile = 'VirtualHost.py'
         get_content = "virtual_hosts = {" \
                       "\n   'test.com:8000': 'root.urls'," \
@@ -73,6 +74,9 @@ def initsetup():
             contents = "".join(lines)
             f.write(contents)
             f.close()
+
+        migrate = 'python manage.py migrate'
+        os.system(migrate)
 
     finally:
 
