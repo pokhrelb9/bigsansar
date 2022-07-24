@@ -1,12 +1,14 @@
 Metadata-Version: 2.1
 Name: Bigsansar
-Version: 0.1.3
+Version: 0.1.5
 Summary: Build one in minutes with bigsansar - a visual site building tool!
 Home-page: https://bigsansar.com
 Author: Bikash Pokhrel
 Author-email: bigsansaroffice@gmail.com
+License: UNKNOWN
 Project-URL: Bug Tracker, https://github.com/pokhrelb9/bigsansar/issues
 Keywords: python,django host,bigsansar,django,django sites framework,django flatpages
+Platform: UNKNOWN
 Classifier: Programming Language :: Python :: 3
 Classifier: License :: OSI Approved :: MIT License
 Classifier: Operating System :: OS Independent
@@ -56,3 +58,4 @@ go to `www` path and open `settings.py` file then add `bigsansar.core.host.Virtu
 ## Some usefull commands:
 
 `python3 manage.py createuser` - get unlimited users.
+

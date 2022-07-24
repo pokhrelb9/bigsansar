@@ -10,6 +10,7 @@ Bigsansar.egg-info/top_level.txt
 bigsansar/__init__.py
 bigsansar/admin.py
 bigsansar/apps.py
+bigsansar/main.py
 bigsansar/models.py
 bigsansar/tests.py
 bigsansar/views.py
