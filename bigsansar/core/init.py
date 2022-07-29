@@ -46,6 +46,8 @@ def initsetup():
                     print('Inserting bigsansar module in to', line)
 
                     code = "    'bigsansar.apps.BigsansarConfig'," \
+                           "\n" \
+                           "    'bigsansar.contrib.account.apps.AccountConfig'," \
                            "\n"
 
                     lines.insert(x, code)

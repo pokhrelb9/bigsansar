@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setuptools.setup(
     name="Bigsansar",
-    version="0.1.6",
+    version="0.1.8",
     author="Bikash Pokhrel",
     author_email="bigsansaroffice@gmail.com",
     description="Build one in minutes with bigsansar - a visual site building tool!",
@@ -30,6 +30,6 @@ setuptools.setup(
     },
 
     python_requires=">=3.6",
-    install_requires=['django'],
+    install_requires=['django','django-phonenumber-field[phonenumberslite]'],
     keywords=['python', 'django host', 'bigsansar', 'django', 'django sites framework', 'django flatpages']
 )
