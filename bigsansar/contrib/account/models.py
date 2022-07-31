@@ -14,5 +14,5 @@ class userinfo(models.Model):
         return self.user.username
 
     class Meta:
-        verbose_name = 'User Information'
+        verbose_name = 'User Advance Information'
         verbose_name_plural = 'Profile Details'

@@ -2,23 +2,21 @@ import os
 
 def initsetup():
 
-    try:
+    if os.path.isdir('www') == True:
+
+        print('Folder www already exits. please delete first www folder and manage.py file.')
+
+    else:
         cmd = 'django-admin startproject www .'
         print('creating a server .............')
         os.system(cmd)
         print('please wait...')
-
-    except:
-        print('error')
-
-    else:
 
         createfile = 'VirtualHost.py'
         get_content = "virtual_hosts = {" \
                       "\n   'test.com:8000': 'root.urls'," \
                       "\n   'example.com:8000': 'ex.urls'," \
                       "\n}"
-
 
         print('we are creating files...')
         f = open(createfile, "w")
@@ -79,7 +77,5 @@ def initsetup():
 
         migrate = 'python manage.py migrate'
         os.system(migrate)
-
-    finally:
 
         print('Finished')

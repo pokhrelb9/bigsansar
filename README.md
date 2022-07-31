@@ -30,7 +30,10 @@ Type `bigsansar init` command for **automatically** setup server .
 
 ### After you get it
 
-go to `www` path and open `settings.py` file then add `bigsansar.apps.BigsansarConfig`  in to 
+go to `www` path and open `settings.py` file then add 
+`'bigsansar.apps.BigsansarConfig'`
+`'bigsansar.contrib.account.apps.AccountConfig'`
+in to 
 `INSTALLED_APPS = []` .
 
 ### For Virtualhost middleware
