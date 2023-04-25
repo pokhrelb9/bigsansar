@@ -1,2 +1,0 @@
-def int(request):
-    pass
