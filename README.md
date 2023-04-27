@@ -24,7 +24,7 @@ You can also download a [gzipped tarball](https://pypi.org/project/Bigsansar/#fi
 This archive is updated every time we commit code.
 
 # for install packages
-`pip install -r indtall.big`
+`pip install -r install.big`
 
 # After you install bigsansar
 Type `bigsansar init` command for **automatically** setup server . 
