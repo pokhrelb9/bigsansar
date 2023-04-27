@@ -23,6 +23,9 @@ Get it using this shell command, which requires [Git](https://git-scm.com/):
 You can also download a [gzipped tarball](https://pypi.org/project/Bigsansar/#files) of the development version. 
 This archive is updated every time we commit code.
 
+# for install packages
+`pip install -r indtall.big`
+
 # After you install bigsansar
 Type `bigsansar init` command for **automatically** setup server . 
 
