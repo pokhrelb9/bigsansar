@@ -49,13 +49,6 @@ go to `www` path and open `settings.py` file then add `bigsansar.core.host.Virtu
 
 
 
-## New update 
-* added virtual host in to admin pannel 
-* added pages system and working in this model 
-* making too easy to handel django with help of bigsansar in the future .
-* Removed signup systems prebuilded .
-
-
 ## Load page in templates
 
 `{% load pages %}
