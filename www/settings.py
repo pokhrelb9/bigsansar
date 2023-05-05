@@ -20,7 +20,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-h-j)o=0b6@l08mspq2vc*%ruy!kpu++8-9*a*kfs3jm2lej*69'
+SECRET_KEY = 'django-insecure--p%r_xfcoldtzi%t+o41$-@&$67(_@5n84gho%-ud0)pt41hw5'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -151,3 +151,11 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 #         'PORT': '',
 #     }
 # }
+
+CKEDITOR_CONFIGS = {
+'default': {
+'toolbar': 'full',
+'extraPlugins': ','.join(
+['youtube','codesnippet']
+),}
+}
