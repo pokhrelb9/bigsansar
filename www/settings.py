@@ -20,7 +20,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-9n(nwh(aq$=%!t8=v1bgr05(%%tnw!tc5qub$y19dnx0(%lunw'
+SECRET_KEY = 'django-insecure-h-j)o=0b6@l08mspq2vc*%ruy!kpu++8-9*a*kfs3jm2lej*69'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -35,6 +35,7 @@ ROOT_URLCONF = 'bigsansar.urls'
 #SECURE_SSL_REDIRECT = True
 MEDIA_ROOT = BASE_DIR/'images'
 MEDIA_URL = 'images/'
+CKEDITOR_UPLOAD_PATH = ''
 
 STATIC_DIR = BASE_DIR/'static'
 STATICFILES_DIRS = [STATIC_DIR, ]
@@ -49,6 +50,7 @@ INSTALLED_APPS = [
     'bigsansar.contrib.sites.apps.SitesConfig',
     'bigsansar.contrib.blogs.apps.BlogsConfig',
     'ckeditor',
+    'ckeditor_uploader',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
