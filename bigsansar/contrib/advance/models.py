@@ -34,5 +34,5 @@ class javascript(models.Model):
          
          
      def get_absolute_url(self):
-         return "http://%s/javascript.js" % (self.domain,)
+         return "http://%s/script.js" % (self.domain,)
      

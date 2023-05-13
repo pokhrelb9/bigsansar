@@ -19,7 +19,7 @@ from django.urls import path
 from bigsansar import views
 
 urlpatterns = [
-    path('javascript.js', views.getjavascript, name = 'javascripts'),
+    path('script.js', views.getjavascript, name = 'javascripts'),
     path('styles.css', views.getcss, name = 'custom css'),
     path('', views.index, name='index'),
     path('<url>', views.pathviews, name='path'),

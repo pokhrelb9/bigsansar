@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: Bigsansar
-Version: 1.4.0
+Version: 1.4.1
 Summary: Build one in minutes with bigsansar - a visual site building tool!
 Home-page: https://bigsansar.com
 Author: Bikash Pokhrel
@@ -45,19 +45,6 @@ This archive is updated every time we commit code.
 # After you install bigsansar
 Type `bigsansar init` command for **automatically** setup server .
 
-# For manually setup
-
-### After you get it
-
-go to `www` path and open `settings.py` file then add
-`'bigsansar.apps.BigsansarConfig'`
-`'bigsansar.contrib.account.apps.AccountConfig'`
-in to
-`INSTALLED_APPS = []` .
-
-### For Virtualhost middleware
-go to `www` path and open `settings.py` file then add `bigsansar.core.host.VirtualHostMiddleware`  in to top of
-`MIDDLEWARE = []` .
 
 ## Some usefull commands:
 
@@ -66,11 +53,11 @@ go to `www` path and open `settings.py` file then add `bigsansar.core.host.Virtu
 
 
 ## New update
+* addedd javascripts system for per domains
 * added custom css system per domains sites 
 * added youtube and codesnippet plugin in to blog post site 
 * added ckeditor_uploader models and settings for blog apps 
 * added Description model in domain site
-* added setting for postgres
 
 
 ## Load page list in templates
