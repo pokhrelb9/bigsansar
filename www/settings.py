@@ -20,7 +20,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-63(_zueerynq!)*1@v_($n&49f-d$e#qyfvmpsg9h+&eqhhxbp'
+SECRET_KEY = 'django-insecure-q9i^k*&_y3fb68j$fyoz@86fz!ty7er2f0^b5y-tlsxxv!vnw#'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -160,3 +160,6 @@ CKEDITOR_CONFIGS = {
 ['youtube','codesnippet']
 ),}
 }
+
+CKEDITOR_RESTRICT_BY_USER = True
+CKEDITOR_ALLOW_NONIMAGE_FILES = False

@@ -26,14 +26,14 @@ class domain_filter(SimpleListFilter):
 
 class domainadmin(admin.ModelAdmin):
     form = create_domainform
-    list_display = ['domain', 'publish_date', 'visitor']
+    list_display = ['domain', 'publish_date', 'visitor', 'id']
 
 
 class pageadmin(admin.ModelAdmin):
     add_form = customaddpageform
     form = custompageform
     prepopulated_fields = {"slug": ("title",)}
-    list_display = ['title', 'domain', 'publish_date', 'visitor']
+    list_display = ['slug', 'domain', 'publish_date', 'visitor']
     list_filter = (domain_filter,)
 
     def get_form(self, request, obj=None, **kwargs):

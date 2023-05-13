@@ -193,6 +193,11 @@ def initsetup():
                               "),}"
                               "\n"
                               "}"
+                              "\n"
+                              "\n"
+                              "CKEDITOR_RESTRICT_BY_USER = True"
+                              "\n"
+                              "CKEDITOR_ALLOW_NONIMAGE_FILES = False"
                               )
                               
             # Close the file
