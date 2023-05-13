@@ -1,0 +1,5 @@
+django
+django-ckeditor
+django-phonenumber-field[phonenumberslite]
+pillow
+requests
