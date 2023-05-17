@@ -52,6 +52,8 @@ def initsetup():
                            "    'ckeditor_uploader'," \
                            "\n" \
                            "    'bigsansar.contrib.advance.apps.AdvanceConfig'," \
+                           "\n" \
+                           "    'fontawesomefree'," \
                            "\n"
 
                     lines.insert(x, code)

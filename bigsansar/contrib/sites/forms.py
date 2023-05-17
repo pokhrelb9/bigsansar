@@ -38,7 +38,7 @@ class customaddpageform(forms.ModelForm):
                 code='duplicate_url',
                 params={'url': self.cleaned_data.get('slug'), 'site': self.cleaned_data.get('domain')}, )
 
-        mkdir = getdir + '/' + str(domains.objects.get(domain=gethost).id)
+        mkdir = getdir + '/' + str(domains.objects.get(domain=gethost).domain)
         try:
             final_directory = os.path.join(BASE_DIR, mkdir)
             if not os.path.exists(final_directory):
@@ -73,7 +73,7 @@ class custompageform(forms.ModelForm):
         if file is None:
             raise ValidationError(message='This field is required.')
 
-        mkdir = getdir + '/' + str(domains.objects.get(domain=gethost).id)
+        mkdir = getdir + '/' + str(domains.objects.get(domain=gethost).domain)
         full_path = os.path.join(BASE_DIR, mkdir)
         createfile = full_path + '/' + file + '.html'
         f = open(createfile, "w", encoding="utf-8")

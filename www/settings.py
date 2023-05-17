@@ -20,7 +20,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-q9i^k*&_y3fb68j$fyoz@86fz!ty7er2f0^b5y-tlsxxv!vnw#'
+SECRET_KEY = 'django-insecure-+#7vjje9**n)(wxv1%orumb-3+1!c1^l-q!e)e%be&xzuajbm9'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     'ckeditor',
     'ckeditor_uploader',
     'bigsansar.contrib.advance.apps.AdvanceConfig',
+    'fontawesomefree',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

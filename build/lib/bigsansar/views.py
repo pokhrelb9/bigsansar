@@ -26,7 +26,7 @@ def index(request):
         return render(request, 'parking.html', {'domain': current_site, 'time': time})
 
     else:
-        asp = 'templates/' + str(db.id) + '/' + 'index.html'
+        asp = 'templates/' + str(db.domain) + '/' + 'index.html'
         full_url = os.path.join(BASE_DIR, asp)
         template = loader.select_template((full_url, DEFAULT_TEMPLATE))
             
@@ -51,7 +51,7 @@ def pathviews(request, url):
         return render(request, '404.html')
 
     else:
-        asp = 'templates/' + str(db.id) + '/' + page.slug + '.html'
+        asp = 'templates/' + str(db.domain) + '/' + page.slug + '.html'
         full_url = os.path.join(BASE_DIR, asp)
         template = loader.select_template((full_url, default_page))
         return HttpResponse(template.render({'gethost': db, 'getpage': page}, request))

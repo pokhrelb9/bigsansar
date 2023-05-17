@@ -31,15 +31,18 @@ Type `bigsansar init` command for **automatically** setup server .
 
 `python3 manage.py createuser` - get unlimited users.
 
+## bug fixed 
+fixed templated tags
+now use extends tags
+{% extends '<domain_name>/<page_slug>.html' %}
 
 
 ## New update
+* added font awesome packages
 * addedd javascripts system for per domains
 * added custom css system per domains sites 
 * added youtube and codesnippet plugin in to blog post site 
 * added ckeditor_uploader models and settings for blog apps 
-* added Description model in domain site
-
 
 ## Load page list in templates
 

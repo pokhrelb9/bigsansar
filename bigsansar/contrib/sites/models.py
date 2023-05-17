@@ -28,7 +28,7 @@ class domains(models.Model):
         return "http://%s" % (self.domain,)
 
     def delete(self, using=None, keep_parents=False):
-        filename = 'templates' + '/' + str(self.id)
+        filename = 'templates' + '/' + str(self.domain)
         try:
             full_url = os.path.join(BASE_DIR, filename)
             shutil.rmtree(full_url)
@@ -58,7 +58,7 @@ class pages(models.Model):
         return "http://%s/%s" % (self.domain, self.slug)
 
     def delete(self, using=None, keep_parents=False):
-        filename = 'templates' + '/' + str(self.domain.id) + '/' + self.slug + '.html'
+        filename = 'templates' + '/' + str(self.domain.domain) + '/' + self.slug + '.html'
         full_url = os.path.join(BASE_DIR, filename)
         if os.path.exists(full_url):
             os.remove(full_url)
