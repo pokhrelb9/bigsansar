@@ -1,3 +1,4 @@
+Bigsansar==1.5.0
 asgiref==3.6.0
 certifi==2022.12.7
 charset-normalizer==3.1.0
@@ -5,6 +6,7 @@ Django==4.2
 django-ckeditor==6.5.1
 django-js-asset==2.0.0
 django-phonenumber-field==7.1.0
+fontawesomefree==6.4.0
 idna==3.4
 phonenumberslite==8.13.11
 Pillow==9.5.0
