@@ -26,7 +26,7 @@ class domain_filter(SimpleListFilter):
 
 class domainadmin(admin.ModelAdmin):
     form = create_domainform
-    list_display = ['domain', 'publish_date', 'visitor', 'id']
+    list_display = ['domain', 'publish_date', 'visitor']
 
 
 class pageadmin(admin.ModelAdmin):

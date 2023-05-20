@@ -6,7 +6,7 @@ from django.contrib.sites.shortcuts import get_current_site
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.template import loader
-
+from bigsansar.contrib.blogs.models import post
 from bigsansar.contrib.sites.models import domains, pages
 
 DEFAULT_TEMPLATE = 'default.html'
@@ -86,3 +86,28 @@ def getjavascript(request):
         getjavahttp = HttpResponse(get_javascript.javascript)
         getjavahttp['Content-Type'] = 'text/javascript'
         return getjavahttp
+    
+
+def sitemap(request):
+    try:
+        current_site = get_current_site(request)
+        domains.objects.get(domain=current_site)
+    except:
+        return render(request, '404.html')
+    
+    else:
+        template = loader.get_template('sitemap.html')
+        getsitemaphttp = HttpResponse(template.render({}, request))
+        getsitemaphttp['Content-Type'] = 'application/xml'
+        return getsitemaphttp
+
+
+def blog_preview(request,id):
+    try:
+        current_site = get_current_site(request)
+        db = domains.objects.get(domain=current_site)
+        get_post = post.objects.get(pk=id, domain=db)
+    except:
+        return render(request, '404.html')
+    else:
+        return render(request, 'blog_preview.html', {'title': get_post.title, 'content': get_post.body})

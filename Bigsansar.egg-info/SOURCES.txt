@@ -218,6 +218,8 @@ bigsansar/templates/404.html
 bigsansar/templates/__init__.py
 bigsansar/templates/acc_active_email.html
 bigsansar/templates/base.html
+bigsansar/templates/blog_preview.html
 bigsansar/templates/default.html
 bigsansar/templates/defaultpage.html
 bigsansar/templates/parking.html
+bigsansar/templates/sitemap.html

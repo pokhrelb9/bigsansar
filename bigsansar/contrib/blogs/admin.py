@@ -7,10 +7,10 @@ from bigsansar.contrib.blogs.models import comment, post
 
 
 class blogadmin(admin.ModelAdmin):
-    list_display = ['title', 'domain', 'user', 'publish_date', 'visitor']
+    list_display = ['title', 'user', 'publish_date', 'visitor']
     prepopulated_fields = {"slug": ("title",)}
     search_fields = ['title']
-    #list_filter = ('title',)
+    list_filter = ('domain',)
 
 
 class commentsadmin(admin.ModelAdmin):

@@ -38,11 +38,11 @@ now use extends tags
 
 
 ## New update
+* added sitmap system 
 * added font awesome packages
 * addedd javascripts system for per domains
 * added custom css system per domains sites 
 * added youtube and codesnippet plugin in to blog post site 
-* added ckeditor_uploader models and settings for blog apps 
 
 ## Load page list in templates
 

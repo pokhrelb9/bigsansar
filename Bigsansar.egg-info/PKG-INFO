@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: Bigsansar
-Version: 1.4.7
+Version: 1.5.0
 Summary: Build one in minutes with bigsansar - a visual site building tool!
 Home-page: https://bigsansar.com
 Author: Bikash Pokhrel
@@ -57,11 +57,11 @@ now use extends tags
 
 
 ## New update
+* added sitmap system 
 * added font awesome packages
 * addedd javascripts system for per domains
 * added custom css system per domains sites 
 * added youtube and codesnippet plugin in to blog post site 
-* added ckeditor_uploader models and settings for blog apps 
 
 ## Load page list in templates
 

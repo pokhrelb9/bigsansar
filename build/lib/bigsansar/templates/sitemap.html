@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+  xmlns="https://www.sitemaps.org/schemas/sitemap/0.9">
+  {% load pages %}
+  {% get_pages as listpage %} 
+  {% for page in listpage %}
+  <url>
+    <loc>https://{{ page.domain }}/{{ page.slug }}</loc>
+    <lastmod>{{ page.publish_date|date:"Y-m-d" }}</lastmod>
+    <changefreq>Daily</changefreq>
+    <priority>1</priority>
+   
+    
+   </url>
+{% endfor %}
+
+</urlset>
