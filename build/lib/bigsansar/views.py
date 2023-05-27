@@ -57,6 +57,29 @@ def pathviews(request, url):
         return HttpResponse(template.render({'gethost': db, 'getpage': page}, request))
 
 
+
+def get_path_url(request, path, slug):
+    default_page = 'defaultpage.html'
+    try:
+        current_site = get_current_site(request)
+        db = domains.objects.get(domain=current_site)
+        get_pagename = path.strip('/')
+        page = pages.objects.get(domain=db, slug=get_pagename)
+        total = db.visitor + 1
+        pagetotal = page.visitor + 1
+        domains.objects.filter(pk=db.id).update(visitor=total)
+        pages.objects.filter(domain=db, slug=get_pagename).update(visitor=pagetotal)
+
+    except:
+        return render(request, '404.html')
+    
+    else:
+         
+         asp = 'templates/' + str(db.domain) + '/' + page.slug + '.html'
+         full_url = os.path.join(BASE_DIR, asp)
+         template = loader.select_template((full_url, default_page))
+         return HttpResponse(template.render({'gethost': db, 'getpage': page, 'slug': slug}, request))
+
 def getcss(request):
     try:
         current_site = get_current_site(request)

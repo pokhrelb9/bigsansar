@@ -20,7 +20,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-+#7vjje9**n)(wxv1%orumb-3+1!c1^l-q!e)e%be&xzuajbm9'
+SECRET_KEY = 'django-insecure-#^rw71(+^_2p-33kp*sae!@1z$tr$@m8^g#p+s)$-7spo*ydz+'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -33,8 +33,8 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 ROOT_URLCONF = 'bigsansar.urls'
 
 #SECURE_SSL_REDIRECT = True
-MEDIA_ROOT = BASE_DIR/'images'
-MEDIA_URL = 'images/'
+MEDIA_ROOT = BASE_DIR/'media'
+MEDIA_URL = 'file/'
 CKEDITOR_UPLOAD_PATH = ''
 
 STATIC_DIR = BASE_DIR/'static'
@@ -59,6 +59,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.humanize',
 ]
 
 MIDDLEWARE = [
@@ -163,4 +164,4 @@ CKEDITOR_CONFIGS = {
 }
 
 CKEDITOR_RESTRICT_BY_USER = True
-CKEDITOR_ALLOW_NONIMAGE_FILES = False
+#CKEDITOR_ALLOW_NONIMAGE_FILES = False

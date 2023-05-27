@@ -54,6 +54,8 @@ def initsetup():
                            "    'bigsansar.contrib.advance.apps.AdvanceConfig'," \
                            "\n" \
                            "    'fontawesomefree'," \
+                           "\n" \
+                           "    'django.contrib.humanize'," \
                            "\n"
 
                     lines.insert(x, code)
@@ -88,9 +90,9 @@ def initsetup():
                                "\n" \
                                "#SECURE_SSL_REDIRECT = True" \
                                "\n" \
-                               "MEDIA_ROOT = BASE_DIR/'images'" \
+                               "MEDIA_ROOT = BASE_DIR/'media'" \
                                "\n" \
-                               "MEDIA_URL = 'images/'" \
+                               "MEDIA_URL = 'file/'" \
                                "\n" \
                                "CKEDITOR_UPLOAD_PATH = ''" \
                                "\n" \
@@ -139,7 +141,7 @@ def initsetup():
                               '\n'
                               'urlpatterns = ['
                               '\n'
-                              'path("imagelist/", include("ckeditor_uploader.urls")),'
+                              'path("filelist/", include("ckeditor_uploader.urls")),'
                               '\n'
                               'path("", admin.site.urls),'
                               '\n'
@@ -199,7 +201,7 @@ def initsetup():
                               "\n"
                               "CKEDITOR_RESTRICT_BY_USER = True"
                               "\n"
-                              "CKEDITOR_ALLOW_NONIMAGE_FILES = False"
+                              "#CKEDITOR_ALLOW_NONIMAGE_FILES = False"
                               )
                               
             # Close the file

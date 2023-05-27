@@ -26,5 +26,6 @@ urlpatterns = [
     path('styles.css', views.getcss, name = 'custom css'),
     path('', views.index, name='index'),
     path('<url>', views.pathviews, name='path'),
+    path('<path>/<slug>', views.get_path_url, name = 'get_path_args'),
 
 ]

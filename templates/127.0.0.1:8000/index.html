@@ -1,100 +1,59 @@
-<!DOCTYPE html>
-<html style="font-size: 16px;" lang="en"><head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta charset="utf-8">
-    <meta name="keywords" content="​Who Am I?">
-    <meta name="description" content="">
-    <title>{{ gethost.Description }} - {{ getpage.title }}</title>
+{% extends '127.0.0.1:8000/base.html' %}
+{%block title %} bigsansar - blogs {% endblock %}
+{% block head %}
 
-    <link rel="stylesheet" href="styles.css" media="screen">
-<link rel="stylesheet" href="styles.css" media="screen">
-    <script class="u-script" type="text/javascript" src="/javascript.js" defer=""></script>
-   
-    <meta name="generator" content="Nicepage 5.9.6, nicepage.com">
-    <link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i">
-    
-    
-    
-    <script type="application/ld+json">{
-		"@context": "http://schema.org",
-		"@type": "Organization",
-		"name": ""
-}</script>
-    <meta name="theme-color" content="#478ac9">
-    <meta property="og:title" content="Home">
-    <meta property="og:type" content="website">
-  <meta data-intl-tel-input-cdn-path="intlTelInput/"></head>
-  <body data-home-page="Home.html" data-home-page-title="Home" class="u-body u-xl-mode" data-lang="en">
-    <section class="u-align-center u-clearfix u-grey-5 u-section-1" id="carousel_b513">
-      <div class="u-clearfix u-sheet u-valign-middle u-sheet-1">
-        <h4 class="u-text u-text-1" data-animation-name="customAnimationIn" data-animation-duration="1500" data-animation-delay="500"> A Bit About Me</h4>
-        <h2 class="u-text u-text-palette-1-base u-text-2" data-animation-name="customAnimationIn" data-animation-duration="1500" data-animation-delay="500"> Who Am I?</h2>
-        <p class="u-text u-text-3" data-animation-name="customAnimationIn" data-animation-duration="1500" data-animation-delay="500">I am&nbsp; Biaksh Pokhrel from Nepal, a YouTuber, and a website owner. i recently completed a Python and Linux OS course on Coursera, which indicates that I have an interest in technology and programming.</p>
-        <div class="u-clearfix u-expanded-width u-layout-wrap u-layout-wrap-1">
-          <div class="u-layout">
-            <div class="u-layout-row">
-              <div class="u-align-center u-container-style u-layout-cell u-palette-1-base u-size-27-lg u-size-27-xl u-size-60-md u-size-60-sm u-size-60-xs u-layout-cell-1" data-animation-name="customAnimationIn" data-animation-duration="1500" data-animation-delay="250">
-                <div class="u-container-layout u-container-layout-1">
-                  <div class="u-image u-image-circle u-preserve-proportions u-image-1" alt="" data-image-width="1000" data-image-height="1000"></div>
-                  <h3 class="u-text u-text-4"> I am happy to know you&nbsp;that bigsansar pypi projects done sucessfully!</h3>
-                </div>
-              </div>
-              <div class="u-align-right u-container-style u-layout-cell u-size-33-lg u-size-33-xl u-size-60-md u-size-60-sm u-size-60-xs u-layout-cell-2">
-                <div class="u-container-layout u-container-layout-2">
-                  <div class="u-expanded-width-md u-expanded-width-sm u-expanded-width-xs u-list u-list-1">
-                    <div class="u-repeater u-repeater-1">
-                      <div class="u-align-left u-border-10 u-border-no-left u-border-no-right u-border-no-top u-border-palette-2-base u-container-style u-custom-item u-list-item u-repeater-item u-shape-rectangle u-white u-list-item-1" data-animation-name="customAnimationIn" data-animation-duration="1500" data-animation-delay="250">
-                        <div class="u-container-layout u-similar-container u-container-layout-3"><span class="u-custom-item u-file-icon u-icon u-icon-1" data-animation-name="customAnimationIn" data-animation-duration="1500" data-animation-delay="750"><img src="images/3670147.png" alt=""></span>
-                          <h4 class="u-text u-text-5">Youtube.com</h4>
-                          <a href="https://youtube.com/bigsansar" class="u-border-1 u-border-active-grey-70 u-border-black u-border-hover-grey-70 u-border-no-left u-border-no-right u-border-no-top u-bottom-left-radius-0 u-bottom-right-radius-0 u-btn u-button-style u-custom-item u-none u-radius-0 u-text-active-palette-2-base u-text-body-color u-text-hover-palette-2-base u-top-left-radius-0 u-top-right-radius-0 u-btn-1" target="_blank">more</a>
-                        </div>
-                      </div>
-                      <div class="u-align-left u-border-10 u-border-no-left u-border-no-right u-border-no-top u-border-palette-4-base u-container-style u-custom-item u-list-item u-repeater-item u-shape-rectangle u-video-cover u-white u-list-item-2" data-animation-name="customAnimationIn" data-animation-duration="1500" data-animation-delay="250">
-                        <div class="u-container-layout u-similar-container u-container-layout-4"><span class="u-custom-item u-file-icon u-icon u-text-palette-4-base u-icon-2" data-animation-name="customAnimationIn" data-animation-duration="1500" data-animation-delay="750"><img src="images/4425412-9b48e8c6.png" alt=""></span>
-                          <h4 class="u-text u-text-6"> Web Design</h4>
-                          <a href="https://code.bigsansar.com" class="u-border-1 u-border-active-grey-70 u-border-black u-border-hover-grey-70 u-border-no-left u-border-no-right u-border-no-top u-bottom-left-radius-0 u-bottom-right-radius-0 u-btn u-button-style u-custom-item u-none u-radius-0 u-text-active-palette-5-base u-text-body-color u-text-hover-palette-5-base u-top-left-radius-0 u-top-right-radius-0 u-btn-2" target="_blank">more</a>
-                        </div>
-                      </div>
-                      <div class="u-align-left u-border-10 u-border-no-left u-border-no-right u-border-no-top u-border-palette-1-base u-container-style u-custom-item u-list-item u-repeater-item u-shape-rectangle u-video-cover u-white u-list-item-3" data-animation-name="customAnimationIn" data-animation-duration="1500" data-animation-delay="250">
-                        <div class="u-container-layout u-similar-container u-container-layout-5"><span class="u-custom-item u-file-icon u-icon u-icon-3" data-animation-name="customAnimationIn" data-animation-duration="1500" data-animation-delay="750"><img src="images/5968764.png" alt=""></span>
-                          <h4 class="u-text u-text-7">facebook.com</h4>
-                          <a href="https://fb.com/pokhrelb9" class="u-border-1 u-border-active-grey-70 u-border-black u-border-hover-grey-70 u-border-no-left u-border-no-right u-border-no-top u-bottom-left-radius-0 u-bottom-right-radius-0 u-btn u-button-style u-custom-item u-none u-radius-0 u-text-active-palette-1-base u-text-body-color u-text-hover-palette-1-base u-top-left-radius-0 u-top-right-radius-0 u-btn-3" target="_blank">more</a>
-                        </div>
-                      </div>
-                      <div class="u-align-left u-border-10 u-border-no-left u-border-no-right u-border-no-top u-border-palette-3-base u-container-style u-custom-item u-list-item u-repeater-item u-shape-rectangle u-video-cover u-white u-list-item-4" data-animation-name="customAnimationIn" data-animation-duration="1500" data-animation-delay="250">
-                        <div class="u-container-layout u-similar-container u-container-layout-6"><span class="u-custom-item u-file-icon u-icon u-text-palette-3-base u-icon-4" data-animation-name="customAnimationIn" data-animation-duration="1500" data-animation-delay="750"><img src="images/8087597-277f11a1.png" alt=""></span>
-                          <h4 class="u-text u-text-8"> Application</h4>
-                          <a href="https://pypi.org/project/Bigsansar/" class="u-border-1 u-border-active-grey-70 u-border-black u-border-hover-grey-70 u-border-no-left u-border-no-right u-border-no-top u-bottom-left-radius-0 u-bottom-right-radius-0 u-btn u-button-style u-custom-item u-none u-radius-0 u-text-active-palette-3-base u-text-body-color u-text-hover-palette-3-base u-top-left-radius-0 u-top-right-radius-0 u-btn-4" target="_blank">more</a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+<link rel="stylesheet" href="http://127.0.0.1:8000/styles.css">
+<style>
+                .card{
+                    box-shadow: 0 16px 48px #E3E7EB;
+                }
+
+        </style>
+
+
+{% endblock %}
+
+{% block body %}
+{% include '127.0.0.1:8000/nav.html' %}
+{% if messages %}
+{% for message in messages %}
+{% if message.tags %}
+<div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+    {{ message }}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+    </button>
+</div>
+{% endif %}
+{% endfor %}
+{% endif %}
+
+<div class="container">
+    {% if user.is_staff %}
+    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+        <a class="btn btn-primary" href="create" role="button">Create Blogs</a>
+    </div>
+    {% else %}
+
+    {% endif %}
+  <div class="row">
+    <div class="col-md-8 card mb-4  mt-3 left  top">
+      <!-- Sidebar Widgets Column -->
+{% load blogs %}
+{% get_blog as bloglist %}
+          {% for list in bloglist %}
+          <div class="card my-4">
+                <h5 class="card-header">{{list.title}} </h5>
+            <div class="card-body">
+                <p class="card-text"> {{list.body|slice:":100"}} </p>
+                <a href="/blog/{{list.slug}}"
+                   class="btn btn-danger">Read More</a>
             </div>
           </div>
-        </div>
-      </div>
-    </section>
-    <section class="u-clearfix u-section-2" id="sec-08e6">
-      <div class="u-clearfix u-sheet u-sheet-1"></div>
-    </section>
-    
-    
-    <footer class="u-align-center u-clearfix u-footer u-grey-80 u-footer" id="sec-0e06"><div class="u-clearfix u-sheet u-sheet-1">
-        <p class="u-small-text u-text u-text-variant u-text-1">Powered By&nbsp;<a class="u-active-none u-border-none u-btn u-button-link u-button-style u-hover-none u-none u-text-palette-5-light-3 u-btn-1" href="http://bigsansar.com" target="_blank">Bigsansar.com</a>
-        </p>
-      </div></footer>
-    <section class="u-backlink u-clearfix u-grey-80">
-      <a class="u-link" href="https://nicepage.com/website-templates" target="_blank">
-        <span>Website Templates</span>
-      </a>
-      <p class="u-text">
-        <span>created with</span>
-      </p>
-      <a class="u-link" href="" target="_blank">
-        <span>Website Builder Software</span>
-      </a>. 
-    </section>
-  
-</body></html>
+          {% endfor %}
+
+    </div>
+
+  </div>
+</div>
+
+{% endblock %}

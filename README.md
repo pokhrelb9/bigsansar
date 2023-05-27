@@ -44,6 +44,44 @@ now use extends tags
 * added custom css system per domains sites 
 * added youtube and codesnippet plugin in to blog post site 
 
+## load blog list in templates
+
+`{% load blogs %}
+{% get_blog as bloglist %}
+          {% for list in bloglist %}
+          <div class="card my-4">
+                <h5 class="card-header">{{list.title}} </h5>
+            <div class="card-body">
+                <p class="card-text"> {{list.body|slice:":100"}} </p>
+                <a href="/blog/{{list.slug}}"
+                   class="btn btn-danger">Read More</a>
+            </div>
+          </div>
+          {% endfor %}`
+
+
+## get single blog objects
+
+`{% load blogs %}
+{% get_blog_object as get_blog %}
+{{ get_blog.title }}
+{{ get_blog.body | safe }}
+`
+
+# get path slug 
+{{ slug }}
+
+#### More variable for **blog** list
+* blog.id
+* blog.domain
+* blog.title
+* blog.slug
+* blog.body
+* blog.visitor
+* blog.publish_date
+
+
+
 ## Load page list in templates
 
 `{% load pages %}
