@@ -4,8 +4,19 @@ from django.db import models
 from django.urls import reverse
 from ckeditor_uploader.fields import RichTextUploadingField 
 from bigsansar.contrib.sites.models import domains
+import time
 
 
+def user_directory_path(instance, filename):
+
+    # file will be uploaded to MEDIA_ROOT / username/<y>/ <m> / <d> / <filename> >
+    years = time.strftime("%Y")
+    month = time.strftime("%m")
+    day = time.strftime("%d")
+    get_time = years + '/' + month + '/' + day
+
+    return str("%s/%s/%s" % (instance.user.username, get_time, filename))
+  
 # Create your models here.
 
 class post(models.Model):
@@ -13,10 +24,19 @@ class post(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=100, default='| Bigsansar')
     slug = models.SlugField(unique=True)
+    thumbnails = models.ImageField(upload_to=user_directory_path, blank=True)
     body = RichTextUploadingField()
-    visitor = models.IntegerField(default=0)
     publish_date = models.DateField(auto_now_add=True)
+    visitor = models.IntegerField(default=0)
 
+    def delete(self, using=None, keep_parents=False):
+        try:
+
+            self.thumbnails.storage.delete(self.thumbnails.name)
+        except:
+            pass
+        
+        super().delete()
 
     def __str__(self):
         return self.title

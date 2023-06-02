@@ -47,7 +47,7 @@ bigsansar/contrib/blogs/models.py
 bigsansar/contrib/blogs/tests.py
 bigsansar/contrib/blogs/views.py
 bigsansar/contrib/blogs/migrations/0001_initial.py
-bigsansar/contrib/blogs/migrations/0002_remove_post_thumbnails_alter_post_body.py
+bigsansar/contrib/blogs/migrations/0002_post_visitor.py
 bigsansar/contrib/blogs/migrations/__init__.py
 bigsansar/contrib/blogs/templatetags/__init__.py
 bigsansar/contrib/blogs/templatetags/blogs.py

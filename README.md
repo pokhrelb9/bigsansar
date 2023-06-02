@@ -1,4 +1,11 @@
+## New update
+* added thumbnails model field in blog system
+* added sitmap system 
+* added font awesome packages
+* addedd javascripts system for per domains
+* added custom css system per domains sites 
 
+ 
 # How to get Bigsansar
 
 Bigsansar is available open-source under the [MIT](https://en.wikipedia.org/wiki/MIT_License) license. We recommend using the latest version of Python 3.
@@ -26,23 +33,21 @@ This archive is updated every time we commit code.
 # After you install bigsansar
 Type `bigsansar init` command for **automatically** setup server .
 
+# How to access admin pannel in local env
+Go to [localhost:8000](http://localhost:8000) 
 
+# How to change admin URL in server side with domain 
+go to **VirtualHost.py** file and change **localhost:8000** with your subdomain 
 ## Some usefull commands:
 
 `python3 manage.py createuser` - get unlimited users.
 
-## bug fixed 
-fixed templated tags
-now use extends tags
+## templatetags for extends and include 
+
 {% extends '<domain_name>/<page_slug>.html' %}
+{% include '<domain_name>/<page_slug>.html' %}
 
 
-## New update
-* added sitmap system 
-* added font awesome packages
-* addedd javascripts system for per domains
-* added custom css system per domains sites 
-* added youtube and codesnippet plugin in to blog post site 
 
 ## load blog list in templates
 
@@ -50,9 +55,9 @@ now use extends tags
 {% get_blog as bloglist %}
           {% for list in bloglist %}
           <div class="card my-4">
-                <h5 class="card-header">{{list.title}} </h5>
+                <h5 class="card-header">{{list.title}} - {{ list.domain }}</h5>
             <div class="card-body">
-                <p class="card-text"> {{list.body|slice:":100"}} </p>
+                <p class="card-text"> {{list.body|slice:":100"}} - {{ list.publish_date }}</p>
                 <a href="/blog/{{list.slug}}"
                    class="btn btn-danger">Read More</a>
             </div>
@@ -65,22 +70,21 @@ now use extends tags
 `{% load blogs %}
 {% get_blog_object as get_blog %}
 {{ get_blog.title }}
+{{ get_blog.thumbnails }}
+{{ get_blog.publish_date }}
+{{ get_blog.domain }}
+{{ get_blog.id }}
+{{ get_blog.slug }}
 {{ get_blog.body | safe }}
+{{ get_blog.visitor }}
 `
+
+## How many people views blog 
+`{% load blogs %}
+{% update_blog_visitor %}`
 
 # get path slug 
 {{ slug }}
-
-#### More variable for **blog** list
-* blog.id
-* blog.domain
-* blog.title
-* blog.slug
-* blog.body
-* blog.visitor
-* blog.publish_date
-
-
 
 ## Load page list in templates
 
