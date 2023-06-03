@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: Bigsansar
-Version: 1.6.1
+Version: 1.6.2
 Summary: Build one in minutes with bigsansar - a visual site building tool!
 Home-page: https://bigsansar.com
 Author: Bikash Pokhrel
@@ -55,7 +55,7 @@ Type `bigsansar init` command for **automatically** setup server .
 # How to access admin pannel in local env
 Go to [localhost:8000](http://localhost:8000) 
 
-# How to change admin ulr in server side with domain 
+# How to change admin URL in server side with domain 
 go to **VirtualHost.py** file and change **localhost:8000** with your subdomain 
 ## Some usefull commands:
 
@@ -63,8 +63,8 @@ go to **VirtualHost.py** file and change **localhost:8000** with your subdomain
 
 ## templatetags for extends and include 
 
-{{% extends '<domain_name>/<page_slug>.html' %}
-% include '<domain_name>/<page_slug>.html' %}
+{% extends '<domain_name>/<page_slug>.html' %}
+{% include '<domain_name>/<page_slug>.html' %}
 
 
 

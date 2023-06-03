@@ -1,4 +1,5 @@
 import os
+from typing import Any, Dict
 
 from django import forms
 from django.core.exceptions import ValidationError
@@ -17,6 +18,20 @@ class create_domainform(forms.ModelForm):
         model = domains
         fields = ('domain', 'Description', 'user',)
 
+    def clean(self):
+        getdir = 'templates'
+        gethost = self.cleaned_data.get('domain')
+        mkdir = getdir + '/' + str(gethost)
+        try:
+            final_directory = os.path.join(BASE_DIR, mkdir)
+            if not os.path.exists(final_directory):
+                os.makedirs(final_directory)
+        except:
+            raise ValidationError(
+                _(final_directory + ' Directory not created "Permission Denied"'),
+            )
+
+        return super().clean()
 
 class customaddpageform(forms.ModelForm):
     class Meta:
