@@ -1,9 +1,9 @@
 ## New update
+* fixed visitor system in to blog post.
 * added thumbnails model field in blog system
 * added sitmap system 
 * added font awesome packages
 * addedd javascripts system for per domains
-* added custom css system per domains sites 
 
  
 # How to get Bigsansar
@@ -79,7 +79,7 @@ go to **VirtualHost.py** file and change **localhost:8000** with your subdomain
 {{ get_blog.visitor }}
 `
 
-## How many people views blog 
+## Count visitor in your blogs
 `{% load blogs %}
 {% update_blog_visitor %}`
 
@@ -126,3 +126,15 @@ go to **VirtualHost.py** file and change **localhost:8000** with your subdomain
 * gethost.Description
 * gethost.publish_date
 * gethost.visitor
+
+
+## How to access codesnippet in to bigsansar pages
+
+**add this script in to html head **
+
+{% load static %}
+<script type="text/javascript" src="{% static 'ckeditor/ckeditor-init.js' %}"></script>
+<script type="text/javascript" src="{% static  'ckeditor/ckeditor/ckeditor.js' %}"></script>
+<link rel="stylesheet" href="{% static 'ckeditor/ckeditor/plugins/codesnippet/lib/highlight/styles/default.css' %}"/>
+<script src="{% static 'ckeditor/ckeditor/plugins/codesnippet/lib/highlight/highlight.pack.js' %}"></script>
+<script>hljs.initHighlightingOnLoad();</script>

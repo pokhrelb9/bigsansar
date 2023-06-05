@@ -132,4 +132,4 @@ def blog_preview(request,id):
     except:
         return render(request, '404.html')
     else:
-        return render(request, 'blog_preview.html', {'title': get_post.title, 'content': get_post.body})
+        return render(request, 'blog_preview.html', {'title': get_post.title,'thumbnails': get_post.thumbnails, 'content': get_post.body})

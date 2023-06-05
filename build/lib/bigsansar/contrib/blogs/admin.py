@@ -1,4 +1,5 @@
 from django.contrib import admin
+from bigsansar.contrib.blogs.forms import customblogform
 
 from bigsansar.contrib.blogs.models import comment, post
 
@@ -7,6 +8,7 @@ from bigsansar.contrib.blogs.models import comment, post
 
 
 class blogadmin(admin.ModelAdmin):
+    form = customblogform
     list_display = ['title', 'user', 'publish_date', 'visitor']
     prepopulated_fields = {"slug": ("title",)}
     search_fields = ['title']

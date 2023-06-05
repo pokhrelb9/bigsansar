@@ -40,7 +40,9 @@ def update_blog_visitor(context):
         db = domains.objects.get(domain=current_site)
         get_blog_objects = post.objects.get(domain=db, slug=dd)
         get_visitor = get_blog_objects.visitor + 1
-        return post.objects.filter(domain=db, slug=dd).update(visitor=get_visitor)
+        post.objects.filter(domain=db, slug=dd).update(visitor=get_visitor)
 
     except:
          pass
+    
+    return ''
