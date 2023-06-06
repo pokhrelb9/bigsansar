@@ -3,6 +3,7 @@ from django.contrib.admin import SimpleListFilter
 from django.utils.translation import gettext_lazy as _
 from bigsansar.contrib.sites.forms import create_domainform, customaddpageform, custompageform
 from bigsansar.contrib.sites.models import domains, pages
+from django.contrib.auth.models import User
 
 
 # Register your models here.
@@ -27,6 +28,18 @@ class domain_filter(SimpleListFilter):
 class domainadmin(admin.ModelAdmin):
     form = create_domainform
     list_display = ['domain', 'publish_date', 'visitor']
+    search_fields = ['domain']
+
+    def get_queryset(self, request):
+        qs = super().get_queryset(request)
+        if request.user.is_superuser:
+            return qs
+        return qs.filter(user=request.user)
+    
+    def formfield_for_foreignkey(self, db_field, request, **kwargs):
+        if db_field.name == "user":
+            kwargs["queryset"] = User.objects.filter(username=request.user.username)
+        return super().formfield_for_foreignkey(db_field, request, **kwargs)
 
 
 class pageadmin(admin.ModelAdmin):
@@ -35,6 +48,7 @@ class pageadmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("title",)}
     list_display = ['slug', 'domain', 'publish_date', 'visitor']
     list_filter = (domain_filter,)
+    search_fields = ['slug']
 
     def get_form(self, request, obj=None, **kwargs):
         """
@@ -45,7 +59,7 @@ class pageadmin(admin.ModelAdmin):
             defaults['form'] = self.add_form
         defaults.update(kwargs)
         return super().get_form(request, obj, **defaults)
-
+        
 
 admin.site.register(domains, domainadmin)
 admin.site.register(pages, pageadmin)
