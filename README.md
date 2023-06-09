@@ -1,9 +1,9 @@
 ## New update
+* fixed control system for superuser and normal user in to custom domain and blog post modols.
 * fixed visitor system in to blog post.
 * added thumbnails model field in blog system
 * added sitmap system 
 * added font awesome packages
-* addedd javascripts system for per domains
 
  
 # How to get Bigsansar

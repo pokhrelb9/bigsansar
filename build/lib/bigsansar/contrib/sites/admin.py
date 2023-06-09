@@ -37,7 +37,10 @@ class domainadmin(admin.ModelAdmin):
         return qs.filter(user=request.user)
     
     def formfield_for_foreignkey(self, db_field, request, **kwargs):
+        qs = super().formfield_for_foreignkey(db_field, request, **kwargs)
         if db_field.name == "user":
+            if request.user.is_superuser:
+                return qs
             kwargs["queryset"] = User.objects.filter(username=request.user.username)
         return super().formfield_for_foreignkey(db_field, request, **kwargs)
 
