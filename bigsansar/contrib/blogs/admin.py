@@ -28,7 +28,7 @@ class domain_filter(SimpleListFilter):
 
 class blogadmin(admin.ModelAdmin):
     form = customblogform
-    list_display = ['title', 'user', 'publish_date', 'visitor']
+    list_display = ['title', 'publish_date', 'visitor']
     prepopulated_fields = {"slug": ("title",)}
     search_fields = ['title']
     list_filter = (domain_filter,)

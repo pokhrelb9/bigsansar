@@ -1,9 +1,9 @@
 ## New update
+* sitemap and styles.css system can edit manually from pages
+* now sitemap system can add or edit manually 
 * fixed control system for superuser and normal user in to custom domain and blog post modols.
 * fixed visitor system in to blog post.
 * added thumbnails model field in blog system
-* added sitmap system 
-* added font awesome packages
 
  
 # How to get Bigsansar
@@ -35,6 +35,16 @@ Type `bigsansar init` command for **automatically** setup server .
 
 # How to access admin pannel in local env
 Go to [localhost:8000](http://localhost:8000) 
+
+# some usefull link 
+[sitemap.xml](http://localhost:8000/sitemap.xml)
+[script.js](http://localhost:8000/script.js)
+[styles.css](http://localhost:8000/styles.css)
+
+# how to edit sitemap , js and css from pages
+
+create a page **slug** name with sitemap,script , styles
+
 
 # How to change admin URL in server side with domain 
 go to **VirtualHost.py** file and change **localhost:8000** with your subdomain 

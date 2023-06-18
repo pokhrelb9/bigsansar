@@ -55,7 +55,12 @@ class pages(models.Model):
         return self.domain.domain
 
     def get_absolute_url(self):
-        return "http://%s/%s" % (self.domain, self.slug)
+        if self.slug == 'styles':
+            return "http://%s/%s.css" % (self.domain, self.slug)
+        elif self.slug == 'sitemap':
+            return "http://%s/%s.xml" % (self.domain, self.slug)
+        else:
+            return "http://%s/%s" % (self.domain, self.slug)
 
     def delete(self, using=None, keep_parents=False):
         filename = 'templates' + '/' + str(self.domain.domain) + '/' + self.slug + '.html'
