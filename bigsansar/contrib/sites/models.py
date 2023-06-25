@@ -59,6 +59,8 @@ class pages(models.Model):
             return "http://%s/%s.css" % (self.domain, self.slug)
         elif self.slug == 'sitemap':
             return "http://%s/%s.xml" % (self.domain, self.slug)
+        elif self.slug == 'script':
+            return "http://%s/%s.js" % (self.domain, self.slug)
         else:
             return "http://%s/%s" % (self.domain, self.slug)
 

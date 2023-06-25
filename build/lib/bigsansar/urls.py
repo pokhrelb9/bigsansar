@@ -20,7 +20,6 @@ from bigsansar import views
 
 
 urlpatterns = [
-    path('blog/preview/<id>', views.blog_preview, name = 'blog preview'),
     path('sitemap.xml', views.sitemap, name= 'sitemap'),
     path('script.js', views.getjavascript, name = 'javascripts'),
     path('styles.css', views.getcss, name = 'custom css'),

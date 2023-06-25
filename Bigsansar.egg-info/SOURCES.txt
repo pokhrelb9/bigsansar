@@ -40,6 +40,7 @@ bigsansar/contrib/advance/migrations/0002_alter_css_options.py
 bigsansar/contrib/advance/migrations/0003_javascript.py
 bigsansar/contrib/advance/migrations/0004_alter_javascript_options.py
 bigsansar/contrib/advance/migrations/0005_delete_css.py
+bigsansar/contrib/advance/migrations/0006_delete_javascript.py
 bigsansar/contrib/advance/migrations/__init__.py
 bigsansar/contrib/blogs/__init__.py
 bigsansar/contrib/blogs/admin.py
@@ -113,5 +114,6 @@ bigsansar/templates/blog_preview.html
 bigsansar/templates/default.html
 bigsansar/templates/defaultpage.html
 bigsansar/templates/parking.html
+bigsansar/templates/script.html
 bigsansar/templates/sitemap.html
 bigsansar/templates/styles.html

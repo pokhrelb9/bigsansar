@@ -41,8 +41,6 @@ class post(models.Model):
     def __str__(self):
         return self.title
     
-    def get_absolute_url(self):
-        return "http://%s/blog/preview/%s" % (self.domain, self.id)
 
     class Meta:
         verbose_name = 'Posts'

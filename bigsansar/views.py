@@ -1,6 +1,5 @@
 import datetime
 import os
-from bigsansar.contrib.advance.models import javascript
 from www.settings import BASE_DIR
 from django.contrib.sites.shortcuts import get_current_site
 from django.http import HttpResponse
@@ -100,16 +99,20 @@ def getcss(request):
     
 
 def getjavascript(request):
+    default_page = 'script.html'
     try:
         current_site = get_current_site(request)
         db = domains.objects.get(domain=current_site)
-        get_javascript = javascript.objects.get(domain = db)
+        page = pages.objects.get(domain=db, slug='script')
+
     except:
         return render(request, '404.html')
     
     else:
-
-        getjavahttp = HttpResponse(get_javascript.javascript)
+        asp = 'templates/' + str(db.domain) + '/' + page.slug + '.html'
+        full_url = os.path.join(BASE_DIR, asp)
+        template = loader.select_template((full_url, default_page))
+        getjavahttp =  HttpResponse(template.render({}, request))
         getjavahttp['Content-Type'] = 'text/javascript'
         return getjavahttp
     
@@ -132,14 +135,5 @@ def sitemap(request):
         getsitemaphttp =  HttpResponse(template.render({}, request))
         getsitemaphttp['Content-Type'] = 'application/xml'
         return getsitemaphttp
+    
 
-
-def blog_preview(request,id):
-    try:
-        current_site = get_current_site(request)
-        db = domains.objects.get(domain=current_site)
-        get_post = post.objects.get(pk=id, domain=db)
-    except:
-        return render(request, '404.html')
-    else:
-        return render(request, 'blog_preview.html', {'title': get_post.title,'thumbnails': get_post.thumbnails, 'content': get_post.body})
