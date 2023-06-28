@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setuptools.setup(
     name="Bigsansar",
-    version="1.7.5",
+    version="1.7.8",
     author="Bikash Pokhrel",
     author_email="bigsansaroffice@gmail.com",
     description="Build one in minutes with bigsansar - a visual site building tool!",
@@ -27,6 +27,7 @@ setuptools.setup(
                                                )),
     #packages=['bigsansar'],
     package_data={'': ['templates/*',
+                       'templates/*/*',
                                 'static/*',
                                 'static/ckeditor/ckeditor/plugins/youtube/*',
                                 'static/ckeditor/ckeditor/plugins/youtube/*/*']},

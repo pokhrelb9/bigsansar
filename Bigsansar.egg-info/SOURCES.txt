@@ -32,8 +32,10 @@ bigsansar/contrib/account/templates/__init__.py
 bigsansar/contrib/advance/__init__.py
 bigsansar/contrib/advance/admin.py
 bigsansar/contrib/advance/apps.py
+bigsansar/contrib/advance/forms.py
 bigsansar/contrib/advance/models.py
 bigsansar/contrib/advance/tests.py
+bigsansar/contrib/advance/urls.py
 bigsansar/contrib/advance/views.py
 bigsansar/contrib/advance/migrations/0001_initial.py
 bigsansar/contrib/advance/migrations/0002_alter_css_options.py
@@ -117,3 +119,8 @@ bigsansar/templates/parking.html
 bigsansar/templates/script.html
 bigsansar/templates/sitemap.html
 bigsansar/templates/styles.html
+bigsansar/templates/admin/chpass.html
+bigsansar/templates/admin/chuname.html
+bigsansar/templates/admin/dashboard.html
+bigsansar/templates/admin/login.html
+bigsansar/templates/admin/nav.html

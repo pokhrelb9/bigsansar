@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: Bigsansar
-Version: 1.7.5
+Version: 1.7.8
 Summary: Build one in minutes with bigsansar - a visual site building tool!
 Home-page: https://bigsansar.com
 Author: Bikash Pokhrel
@@ -18,11 +18,11 @@ Description-Content-Type: text/markdown
 License-File: LICENSE
 
 ## New update
+* added new admin pannel access from /admin path
 * sitemap , javascript and styles.css system can edit manually from pages
 * now sitemap system can add or edit manually 
 * fixed control system for superuser and normal user in to custom domain and blog post modols.
 * fixed visitor system in to blog post.
-* added thumbnails model field in blog system
 
  
 # How to get Bigsansar

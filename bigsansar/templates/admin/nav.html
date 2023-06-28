@@ -1,0 +1,62 @@
+
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+	<div class="container-fluid">
+		{% load static %}
+		<a href="/admin" class="navbar-brand">
+			<img src="{% static 'logo.png' %}" width="30" height="30" class="d-inline-block align-top" alt="">
+			BIGSANSAR
+		</a>
+		<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+			<ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+				<form class="d-flex" action="http://google.com/search">
+					<input type="hidden" name="sitesearch" value="bigsansar.com">
+					<br/>
+					<input class="form-control me-2" type="search" name="q" placeholder="Search" aria-label="Search">
+					<button class="btn btn-outline-success" type="submit">Search</button>
+				</form>
+				{% if user.is_authenticated %}
+
+				<li class="nav-item dropdown" >
+					<a class="nav-link dropdown-toggle active" href="#" role="button" id="navbarDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						{{ request.user }}
+					</a>
+					<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+						<li>
+							<a class="dropdown-item" href="/admin/dashboard">Dashboard</a>
+						</li>
+						<li>
+							<a class="dropdown-item" href="/admin/changeuname">Change Username</a>
+						</li>
+
+						<li>
+							<hr class="dropdown-divider">
+						</li>
+						<li>
+							<a class="dropdown-item" href="/admin/changepass">Change Password</a>
+						</li>
+
+					</ul>
+				</li>
+				<li class="nav-item active">
+					<a href="/admin/logout" class="nav-item nav-link active">
+						<i class="fa fa-sign-out" aria-hidden="true"></i>LOGOUT
+					</a>
+				</li>
+
+				{% else %}
+				<li class="nav-item active">
+					<a href="/login" class="nav-item nav-link active">
+						<i class="fa fa-sign-in" aria-hidden="true"></i>
+						LOGIN
+					</a>
+				</li>
+				{% endif %}
+			</ul>
+		</div>
+	</div>
+</nav>

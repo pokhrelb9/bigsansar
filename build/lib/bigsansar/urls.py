@@ -14,12 +14,14 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 
-from django.urls import path
-
+from django.urls import include, path
+from bigsansar.contrib.advance import urls , views as v
 from bigsansar import views
 
 
 urlpatterns = [
+    path('admin', v.admin_redirect, name='admin redirect'),
+    path('admin/', include(urls)),
     path('sitemap.xml', views.sitemap, name= 'sitemap'),
     path('script.js', views.getjavascript, name = 'javascripts'),
     path('styles.css', views.getcss, name = 'custom css'),
