@@ -11,6 +11,9 @@ urlpatterns = [
     path('bpanel', admin.site.urls),
     path('changeuname', views.chuname, name='changeuname'),
     path('changepass', views.chpass, name='changepass'),
+    path("filelist/", include("ckeditor_uploader.urls")),
+    path('account/edit', views.editprofile, name='editprofile'),
+    path('domain/', include('bigsansar.contrib.sites.urls')),
 
     
 ]

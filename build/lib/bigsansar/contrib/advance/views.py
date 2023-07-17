@@ -4,7 +4,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth import login, logout, update_session_auth_hash, authenticate
 from django.core.paginator import Paginator
 import requests
-from bigsansar.contrib.advance.forms import chpassform, loginform, userchform
+from bigsansar.contrib.advance.forms import chpassform, loginform, profileform, userchform, usrinfoform
 from bigsansar.contrib.sites.models import domains
 from django.contrib import messages
 
@@ -93,3 +93,26 @@ def chpass(request):
 
     else:
         return redirect('/admin')
+    
+
+def editprofile(request):
+    if request.user.is_authenticated:
+        if request.method == 'POST':
+            form = profileform(request.POST, instance=request.user)
+            form1 = usrinfoform(request.POST, instance=request.user.userinfo)
+            if form.is_valid() and form1.is_valid():
+                form.save()
+                form1.save()
+                messages.success(request, 'Profile Successfully Updated')
+                return redirect('/admin/dashboard')
+
+        else:
+            form = profileform(instance=request.user)
+            form1 = usrinfoform(instance=request.user.userinfo)
+        return render(request, 'admin/editprofile.html', {'form': form, 'form1': form1})
+
+    else:
+        return redirect('/admin')
+    
+
+

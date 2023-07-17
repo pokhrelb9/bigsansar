@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{%block title %} bigsansar - Create a domain {% endblock %}
+{% block head %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'style.css' %}">
+{% endblock %}
+{% block body %}
+{% include 'admin/nav.html' %}
+<div class="wrapper">
+    <form class="form" method="post" action="" >
+        <h2 class="form-heading text-center">Change A Domain</h2><br/>
+        {% csrf_token %}
+        {{form.as_p}}
+
+        <button type="submit" class="btn btn-lg btn-primary btn-block">Submit</button>
+        <br/>
+        <br/>
+        <div class="card">
+            <div class="card-header">
+                Set up a custom domain
+            </div>
+            <div class="card-body">
+                <p class="card-text">
+                    Add these 2 A-records that point to Bigsansar IPs.
+                    <ul>
+                <li>**.**.**.**</li>
+                <li>**.**.**.**</li>
+            </ul>
+                </p>
+            </div>
+        </div>
+    </form>
+</div>
+
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{%block title %} bigsansar - Create a domain {% endblock %}
+{% block head %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'style.css' %}">
+{% endblock %}
+{% block body %}
+{% include 'admin/nav.html' %}
+{% if messages %}
+        {% for message in messages %}
+        {% if message.tags %}
+        <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+            </button>
+        </div>
+        {% endif %}
+        {% endfor %}
+        {% endif %}
+<div class="wrapper">
+    <form class="form" method="post" action="" >
+        <h2 class="form-heading text-center">Create A Page</h2><br/>
+        {% csrf_token %}
+        {{form.as_p}}
+        <button type="submit" class="btn btn-lg btn-primary btn-block">Submit</button>
+    </form>
+</div>
+{% endblock %}

@@ -95,3 +95,23 @@ class custompageform(forms.ModelForm):
         f.write(get_content)
         f.close()
         return super().clean()
+    
+
+
+class create_domainform(forms.ModelForm):
+    domain = forms.CharField(max_length=100, min_length=3, validators=[
+        RegexValidator('^[a-z0-9.]+\.[a-z0-9]{1,5}$', message='Please enter your correct domain name')],
+                             widget=forms.TextInput(attrs={'autofocus': True, 'class': 'form-control', }))
+
+    class Meta:
+        model = domains
+        fields = ('domain',)
+
+
+class customviewspageform(forms.ModelForm):
+    title = forms.CharField(max_length=50, required=True,
+                            widget=forms.TextInput(attrs={'class': 'form-control', 'autofocus': True}))
+
+    class Meta:
+        model = pages
+        fields = ('title',)

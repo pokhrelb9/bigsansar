@@ -2,6 +2,9 @@ from django import forms
 from django.contrib.auth.forms import AuthenticationForm, PasswordResetForm, SetPasswordForm, UserCreationForm, UserChangeForm, PasswordChangeForm
 from django.core.validators import RegexValidator
 from django.contrib.auth.models import User
+from phonenumber_field.formfields import PhoneNumberField
+
+from bigsansar.contrib.account.models import userinfo
 
 
 class loginform(AuthenticationForm):
@@ -33,3 +36,29 @@ class chpassform(PasswordChangeForm):
     class Meta:
         model = User
         fields = ['password1', 'password2']
+
+
+class profileform(UserChangeForm):
+    first_name = forms.CharField(max_length=15, min_length=5, validators=[
+        RegexValidator('^[A-Za-z]+$', message='Please enter your correct First name')],
+                                 widget=forms.TextInput(attrs={'autofocus': True, 'class': 'form-control', }))
+    last_name = forms.CharField(max_length=15, min_length=5, validators=[
+        RegexValidator('^[A-Za-z]+$', message='Please enter your correct Last name')],
+                                widget=forms.TextInput(attrs={'class': 'form-control', }))
+    email = forms.EmailField(max_length=60, min_length=5, help_text='Required. Inform a valid email address.',
+                             widget=forms.TextInput(attrs={'class': 'form-control'}))
+    password = None
+
+    class Meta:
+        model = User
+        fields = ('first_name', 'last_name', 'email',)
+
+
+
+class usrinfoform(forms.ModelForm):
+    phone = PhoneNumberField(required=False, widget=forms.TextInput(attrs={'class': 'form-control', }))
+    address = forms.CharField(required=False, widget=forms.TextInput(attrs={'class': 'form-control', }))
+
+    class Meta:
+        model = userinfo
+        fields = ('phone', 'address',)

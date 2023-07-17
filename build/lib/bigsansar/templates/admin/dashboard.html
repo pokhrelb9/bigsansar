@@ -25,12 +25,12 @@
         {% endif %}
         <!-- Breadcrumb -->
 
-            <nav aria-label="breadcrumb" class="main-breadcrumb">
-              <ol class="breadcrumb">
-               <!--  <li class="breadcrumb-item active" aria-current="page">Home</li>
-                <li class="breadcrumb-item active" aria-current="page">Dashboard</li> -->
-              </ol>
-            </nav>
+        <nav aria-label="breadcrumb" class="main-breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="/">Home</a></li>
+              <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
+            </ol>
+          </nav>
 
         <!-- /Breadcrumb -->
 
@@ -125,7 +125,7 @@
                         <hr>
                         <div class="row">
                             <div class="col-sm-12">
-                                <a class="btn btn-info " href="/account/edit">Edit</a>
+                                <a class="btn btn-info " href="/admin/account/edit">Edit</a>
                             </div>
                         </div>
                     </div>
@@ -160,7 +160,7 @@
 
 										<tr>
 											<th style="text-align:left">
-												<a href="/domain/manage/{{ domains.id }}" style="text-decoration:none;">{{ domains.domain }}</a>
+												<a href="/admin/domain/manage/{{ domains.id }}" style="text-decoration:none;">{{ domains.domain }}</a>
 											</th>
 											<th style="text-align:right">
 												<a href="http://{{ domains.domain }}" target="_blank"><i class="fa fa-eye" aria-hidden="true"></i></a>

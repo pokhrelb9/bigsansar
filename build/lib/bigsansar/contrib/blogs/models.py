@@ -5,6 +5,7 @@ from django.urls import reverse
 from ckeditor_uploader.fields import RichTextUploadingField 
 from bigsansar.contrib.sites.models import domains
 import time
+from django.utils.text import slugify
 
 
 def user_directory_path(instance, filename):
@@ -40,6 +41,7 @@ class post(models.Model):
 
     def __str__(self):
         return self.title
+    
     
 
     class Meta:
