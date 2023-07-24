@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{%block title %} bigsansar - Create a domain {% endblock %}
+{% block head %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'style.css' %}">
+<style>
+	
+	.form1
+{
+	max-width: 1000px;
+	margin: 0 auto;
+	background-color: #fff;
+	padding: 15px 40px 50px;
+	border: 1px solid #e5e5e5;
+	border-radius: 10px;
+}
+
+</style>
+{% endblock %}
+{% block body %}
+{% include 'admin/nav.html' %}
+
+<div class="wrapper">
+    <form class="form1" method="post" action="" >
+        <h2 class="form-heading text-center">Edit A Page</h2><br/>
+        {% csrf_token %}
+        {{form.as_p}}
+        <button type="submit" class="btn btn-lg btn-primary btn-block">Submit</button>
+    </form>
+</div>
+{% endblock %}

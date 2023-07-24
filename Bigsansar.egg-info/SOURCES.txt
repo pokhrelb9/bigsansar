@@ -129,3 +129,5 @@ bigsansar/templates/admin/editprofile.html
 bigsansar/templates/admin/login.html
 bigsansar/templates/admin/nav.html
 bigsansar/templates/admin/page_create.html
+bigsansar/templates/admin/page_delete.html
+bigsansar/templates/admin/page_edit.html

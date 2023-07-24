@@ -3,7 +3,7 @@ import os
 from django.shortcuts import redirect, render
 from django.core.paginator import Paginator
 import requests
-from bigsansar.contrib.sites.forms import create_domainform, customviewspageform
+from bigsansar.contrib.sites.forms import create_domainform, customviewseditpage, customviewspageform
 from django.contrib import messages
 from bigsansar.contrib.sites.models import domains, pages
 from django.utils.text import slugify
@@ -125,3 +125,75 @@ def page_create(request, id):
     else:
         return redirect('/admin')
 
+
+
+def pages_edit(request, id, pagesid):
+    if request.user.is_authenticated:
+        getdir = 'templates'
+
+        try:
+            user = request.user
+            get_host = domains.objects.get(pk=id, user=user)
+            query = pages.objects.get(domain=id, id=pagesid)
+
+        except:
+            return render(request, '404.html')
+
+        else:
+            if request.method == 'POST':
+                form = customviewseditpage(request.POST, instance=query)
+                if form.is_valid():
+                    db = form.save(commit=False)
+                    db.domain = get_host
+
+                    mkdir = getdir + '/' + str(get_host.domain)
+                    full_path = os.path.join(BASE_DIR, mkdir)
+                    createfile = full_path + '/' + query.slug + '.html'
+                    get_content = form.cleaned_data.get('body')
+
+                    f = open(createfile, "w", encoding="utf-8")
+                    f.write(get_content)
+                    f.close()
+                    db.save()
+                    messages.success(request, 'pages Successfully Updated')
+                    return redirect('/admin/domain/manage/' + id)
+
+            else:
+                form = customviewseditpage(instance=query)
+
+            return render(request, 'admin/page_edit.html', {'form': form})
+
+    else:
+
+        return redirect('/admin')
+
+
+
+def page_delete(request, id, pagesid):
+    if request.user.is_authenticated:
+        getdir = 'templates'
+
+        try:
+            user = request.user
+            getdomain = domains.objects.get(pk=id, user=user)
+            query = pages.objects.get(domain=id, id=pagesid)
+
+        except:
+            return render(request, '404.html')
+
+        if request.method == 'POST':
+            mkdir = getdir + '/' + str(getdomain.domain)
+            createfile = mkdir + '/' + query.slug + '.html'
+
+            if os.path.exists(createfile):
+                os.remove(createfile)
+                query.delete()
+            else:
+                query.delete()
+
+            messages.success(request, 'Pages Successfully Deleted')
+            return redirect('/admin/domain/manage/' + id)
+        return render(request, 'admin/page_delete.html', {'path': query, 'domain': getdomain})
+
+    else:
+        redirect('/admin')

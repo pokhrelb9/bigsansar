@@ -115,3 +115,14 @@ class customviewspageform(forms.ModelForm):
     class Meta:
         model = pages
         fields = ('title',)
+
+
+
+class customviewseditpage(forms.ModelForm):
+    title = forms.CharField(max_length=50, required=True,
+                            widget=forms.TextInput(attrs={'class': 'form-control', 'autofocus': True}))
+
+    class Meta:
+        model = pages
+        fields = ('title', 'body',)
+        widgets = {'body': forms.Textarea(attrs={'class': 'form-control', 'cols': 90, 'rows': 20})}

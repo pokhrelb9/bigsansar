@@ -203,11 +203,11 @@
 
 										<tr>
 											<th style="text-align:left">
-												<a href="/domain/manage/{{ host.id }}/pages/{{ page.id }}/edit" style="text-decoration:none;">{{ page.title }}</a>
+												<a href="{{ host.id }}/pages/{{ page.id }}/edit" style="text-decoration:none;">{{ page.title }}</a>
 											</th>
 											<th style="text-align:right">
 												<a href="http://{{ host.domain }}/{{ page.slug }}" target="_blank"><i class="fa fa-eye" aria-hidden="true"></i></a>
-												<a href="/domain/manage/{{ host.id }}/pages/{{ page.id }}/delete"> <i class="fa fa-trash" aria-hidden="true"></i> </a>
+												<a href="{{ host.id }}/pages/{{ page.id }}/delete"> <i class="fa fa-trash" aria-hidden="true"></i> </a>
 											</th>
 
 										</tr>

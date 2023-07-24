@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{%block title %} bigsansar - Create a domain {% endblock %}
+{% block head %}
+
+<!-- Font Awesome Icon Library -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<style>
+    .center {
+      margin: auto;
+      width: 60%;
+      border: 3px solid #73AD21;
+      padding: 10px;
+      text-align: center;
+            }
+    </style>
+
+{% load static %}
+<link rel="stylesheet" href="{% static 'style.css' %}">
+{% endblock %}
+{% block body %}
+{% include 'admin/nav.html' %}
+
+<div class="center">
+	<p>Are you sure you want to permanently delete "<b>{{ path.slug }}</b>" ?
+	</p>
+	<br/>
+	<form  method="post" action="" class="was-validated">
+		{% csrf_token %}
+		<a href="/admin/domain/manage/{{ domain.id }}" class="btn btn-lite" role="button">Cancle</a>
+		<button type="submit" class="btn btn-danger" name="file_del">Delete</button>
+	</form>
+</div>
+
+{% endblock %}
