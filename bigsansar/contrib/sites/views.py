@@ -197,3 +197,28 @@ def page_delete(request, id, pagesid):
 
     else:
         redirect('/admin')
+
+
+# Create your views here.
+def create_domain(request):
+    if request.user.is_authenticated:
+        if request.user.is_superuser:
+
+            if request.method == 'POST':
+                form = create_domainform(request.POST)
+
+                if form.is_valid():
+                    query = form.save(commit=False)
+                    query.user = request.user
+                    query.save()
+                    messages.success(request, 'domain Successfully Created')
+                    return redirect('/admin/dashboard')
+
+            else:
+                form = create_domainform()
+            return render(request, 'admin/create_domain.html', {'form': form})
+
+        else:
+            return render(request, '404.html')
+    else:
+        return redirect('/admin')

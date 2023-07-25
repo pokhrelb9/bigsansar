@@ -122,6 +122,7 @@ bigsansar/templates/sitemap.html
 bigsansar/templates/styles.html
 bigsansar/templates/admin/chpass.html
 bigsansar/templates/admin/chuname.html
+bigsansar/templates/admin/create_domain.html
 bigsansar/templates/admin/dashboard.html
 bigsansar/templates/admin/domain_manage.html
 bigsansar/templates/admin/edit_domain.html

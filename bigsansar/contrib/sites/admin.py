@@ -25,24 +25,6 @@ class domain_filter(SimpleListFilter):
             return queryset.filter(domain=self.value())
 
 
-class domainadmin(admin.ModelAdmin):
-    form = create_domainform
-    list_display = ['domain', 'publish_date', 'visitor']
-    search_fields = ['domain']
-
-    def get_queryset(self, request):
-        qs = super().get_queryset(request)
-        if request.user.is_superuser:
-            return qs
-        return qs.filter(user=request.user)
-    
-    def formfield_for_foreignkey(self, db_field, request, **kwargs):
-        qs = super().formfield_for_foreignkey(db_field, request, **kwargs)
-        if db_field.name == "user":
-            if request.user.is_superuser:
-                return qs
-            kwargs["queryset"] = User.objects.filter(username=request.user.username)
-        return super().formfield_for_foreignkey(db_field, request, **kwargs)
 
 
 class pageadmin(admin.ModelAdmin):
@@ -64,5 +46,5 @@ class pageadmin(admin.ModelAdmin):
         return super().get_form(request, obj, **defaults)
         
 
-admin.site.register(domains, domainadmin)
+
 admin.site.register(pages, pageadmin)
