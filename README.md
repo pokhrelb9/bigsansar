@@ -1,4 +1,5 @@
 ## New update
+* added Bigsansar New Update system
 * added new admin pannel access from /admin path
 * sitemap , javascript and styles.css system can edit manually from pages
 * now sitemap system can add or edit manually 

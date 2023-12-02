@@ -3,7 +3,7 @@ from django.contrib.auth.forms import AuthenticationForm, PasswordResetForm, Set
 from django.core.validators import RegexValidator
 from django.contrib.auth.models import User
 from phonenumber_field.formfields import PhoneNumberField
-
+from bigsansar.contrib.advance.models import admin_update
 from bigsansar.contrib.account.models import userinfo
 
 
@@ -62,3 +62,13 @@ class usrinfoform(forms.ModelForm):
     class Meta:
         model = userinfo
         fields = ('phone', 'address',)
+
+
+
+class custom_admin_upadte(forms.ModelForm):
+    title = forms.CharField(widget=forms.TextInput(attrs={'autofocus': True, 'class': 'form-control', }))
+    url = forms.URLField(required=False, widget=forms.TextInput(attrs={'class': 'form-control', }))
+
+    class Meta:
+        model = admin_update
+        fields = ('title', 'url',)
