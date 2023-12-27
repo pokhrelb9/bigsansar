@@ -1,21 +1,33 @@
 import os
+import shutil
+
+
 
 
 def initsetup():
 
     if os.path.isdir('www') == True:
 
-        print('Folder www already exits. please delete first www folder and manage.py file.')
+        print('RE-Configuring now')
+        print('removing related file and folider')
+        os.remove('manage.py')
+        shutil.rmtree('www')
+        print('re installing internal package')
+        return config()
 
     else:
+        return config()
+
+def config():
+        
         cmd = 'django-admin startproject www .'
         print('creating a server .............')
         os.system(cmd)
         print('please wait...')
 
         get_content = "virtual_hosts = {" \
-                      "\n   'localhost:8000': 'www.urls'," \
-                      "\n   'example.com:8000': 'ex.urls'," \
+                      "\n   'localhost': 'www.urls'," \
+                      "\n   'example.com': 'ex.urls'," \
                       "\n}"
 
         print('we are creating files...')

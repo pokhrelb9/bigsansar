@@ -1,23 +1,25 @@
 Metadata-Version: 2.1
 Name: Bigsansar
-Version: 1.8.5
+Version: 1.9.9
 Summary: Build one in minutes with bigsansar - a visual site building tool!
 Home-page: https://bigsansar.com
 Author: Bikash Pokhrel
 Author-email: bigsansaroffice@gmail.com
 License: UNKNOWN
-Project-URL: Bug Tracker, https://github.com/pokhrelb9/bigsansar/issues
 Project-URL: Documentations, https://docs.bigsansar.com/
 Keywords: python,django host,bigsansar,django,django sites framework,django flatpages
 Platform: UNKNOWN
 Classifier: Programming Language :: Python :: 3
 Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: POSIX :: Linux
 Classifier: Operating System :: OS Independent
 Requires-Python: >=3.6
 Description-Content-Type: text/markdown
 License-File: LICENSE
 
 ## New update
+
+* added Bigsansar New Update system
 * added new admin pannel access from /admin path
 * sitemap , javascript and styles.css system can edit manually from pages
 * now sitemap system can add or edit manually 
@@ -28,7 +30,7 @@ License-File: LICENSE
 # How to get Bigsansar
 
 Bigsansar is available open-source under the [MIT](https://en.wikipedia.org/wiki/MIT_License) license. We recommend using the latest version of Python 3.
-Bigsansar is Fully based on django.
+Bigsansar is Fully based on django and linux ubuntu.
 You can use
 [bigsansar](https://bigsansar.com)
 for install packaged.
@@ -39,26 +41,22 @@ view our tutorials in
 for playlist:
 [bigsansar for django](https://www.youtube.com/playlist?list=PLqdXqRSrD-LC6i7YQAaqB57FaCfWEZkth)
 
-# Get the latest development version
-The latest and greatest Bigsasnar version is the one that’s in our Git repository (our revision-control system).
-This is only for experienced users who want to try incoming changes and help identify bugs before an official release.
-Get it using this shell command, which requires [Git](https://git-scm.com/):
-
-`git clone https://github.com/pokhrelb9/bigsansar.git`
-
-You can also download a [gzipped tarball](https://pypi.org/project/Bigsansar/#files) of the development version.
-This archive is updated every time we commit code.
 
 # After you install bigsansar
-Type `bigsansar init` command for **automatically** setup server .
+Type `bigsansar init` command for **automatically** setup server for internal configurations.
 
-# How to access admin pannel in local env
-Go to [localhost:8000](http://localhost:8000) 
+** this command valid into vertualenv for developer 
+
+# for full setup in to server 
+
+this is work only on ubuntu os 
+type `sudo bigsansar setup_server` commend for fully setup into server .
+
 
 # some usefull link 
-[sitemap.xml](http://localhost:8000/sitemap.xml)
-[script.js](http://localhost:8000/script.js)
-[styles.css](http://localhost:8000/styles.css)
+[sitemap.xml](http://localhost/sitemap.xml)
+[script.js](http://localhost/script.js)
+[styles.css](http://localhost/styles.css)
 
 # how to edit sitemap , js and css from pages
 
@@ -66,7 +64,7 @@ create a page **slug** name with sitemap,script , styles
 
 
 # How to change admin URL in server side with domain 
-go to **VirtualHost.py** file and change **localhost:8000** with your subdomain 
+go to **VirtualHost.py** file and change **localhost** with your subdomain 
 ## Some usefull commands:
 
 `python3 manage.py createuser` - get unlimited users.

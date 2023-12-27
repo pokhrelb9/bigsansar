@@ -4,7 +4,8 @@ from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth import login, logout, update_session_auth_hash, authenticate
 from django.core.paginator import Paginator
 import requests
-from bigsansar.contrib.advance.forms import chpassform, loginform, profileform, userchform, usrinfoform
+from bigsansar.contrib.advance.forms import chpassform, custom_admin_upadte, loginform, profileform, userchform, usrinfoform
+from bigsansar.contrib.advance.models import admin_update
 from bigsansar.contrib.sites.models import domains
 from django.contrib import messages
 
@@ -52,8 +53,7 @@ def dashboard(request):
         location_data_one = res.text
         geo = json.loads(location_data_one)
         browser = request.META['HTTP_USER_AGENT']
-        update = None
-        #admin_update.objects.all().order_by('-id')[:5]
+        update = admin_update.objects.all().order_by('-id')[:5]
         return render(request, 'admin/dashboard.html', {'blog': update, 'ip': ip, 'geo': geo, 'browser': browser,
                                                   'domains': domain, })
 
@@ -116,3 +116,25 @@ def editprofile(request):
     
 
 
+def admin_update_fun(request):
+
+    if request.user.is_authenticated:
+        if request.user.is_staff:
+            if request.method == 'POST':
+                form = custom_admin_upadte(request.POST)
+                if form.is_valid():
+                    q = form.save(commit=False)
+                    q.user = request.user
+                    q.save()
+                    messages.success(request, 'admin updated Successfully Created')
+                    return redirect('/admin/dashboard')
+
+            else:
+                form = custom_admin_upadte()
+            return render(request, 'admin/admin_update.html', {'form': form,})
+
+        else:
+            return render(request, '404.html')
+
+    else:
+        return redirect('/login')

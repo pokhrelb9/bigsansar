@@ -43,6 +43,7 @@ bigsansar/contrib/advance/migrations/0003_javascript.py
 bigsansar/contrib/advance/migrations/0004_alter_javascript_options.py
 bigsansar/contrib/advance/migrations/0005_delete_css.py
 bigsansar/contrib/advance/migrations/0006_delete_javascript.py
+bigsansar/contrib/advance/migrations/0007_initial.py
 bigsansar/contrib/advance/migrations/__init__.py
 bigsansar/contrib/blogs/__init__.py
 bigsansar/contrib/blogs/admin.py
@@ -71,6 +72,7 @@ bigsansar/contrib/sites/templatetags/pages.py
 bigsansar/core/__init__.py
 bigsansar/core/host.py
 bigsansar/core/init.py
+bigsansar/core/ubuntu.py
 bigsansar/management/__init__.py
 bigsansar/management/commands/__init__.py
 bigsansar/management/commands/createuser.py
@@ -120,6 +122,7 @@ bigsansar/templates/parking.html
 bigsansar/templates/script.html
 bigsansar/templates/sitemap.html
 bigsansar/templates/styles.html
+bigsansar/templates/admin/admin_update.html
 bigsansar/templates/admin/chpass.html
 bigsansar/templates/admin/chuname.html
 bigsansar/templates/admin/create_domain.html
