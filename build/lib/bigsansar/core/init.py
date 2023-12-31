@@ -233,8 +233,8 @@ def config():
 
             wsgifile.close()
 
-        cmd1 = 'python manage.py migrate'
-        cmd2 = 'python manage.py collectstatic'
+        cmd1 = 'python3 manage.py migrate'
+        cmd2 = 'python3 manage.py collectstatic'
 
         os.system(cmd1)
         os.system(cmd2)

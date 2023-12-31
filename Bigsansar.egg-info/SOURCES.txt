@@ -16,6 +16,8 @@ bigsansar/tests.py
 bigsansar/urls.py
 bigsansar/views.py
 bigsansar/contrib/__init__.py
+bigsansar/contrib/urls.py
+bigsansar/contrib/views.py
 bigsansar/contrib/account/__init__.py
 bigsansar/contrib/account/admin.py
 bigsansar/contrib/account/apps.py
@@ -73,6 +75,9 @@ bigsansar/core/__init__.py
 bigsansar/core/host.py
 bigsansar/core/init.py
 bigsansar/core/ubuntu.py
+bigsansar/etc/chroot_v1.zip
+bigsansar/etc/serve-cgi-bin.conf
+bigsansar/etc/sshd_config
 bigsansar/management/__init__.py
 bigsansar/management/commands/__init__.py
 bigsansar/management/commands/createuser.py

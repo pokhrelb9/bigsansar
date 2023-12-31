@@ -31,7 +31,8 @@ Type `bigsansar init` command for **automatically** setup server for internal co
 # for full setup in to server 
 
 this is work only on ubuntu os 
-type `sudo bigsansar setup_server` commend for fully setup into server .
+1) type `sudo pip install bigsansar` 
+2) type `sudo bigsansar setup_server` commend for fully setup into server .
 
 
 # some usefull link 

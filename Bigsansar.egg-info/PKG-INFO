@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: Bigsansar
-Version: 1.9.9
+Version: 2.0.9
 Summary: Build one in minutes with bigsansar - a visual site building tool!
 Home-page: https://bigsansar.com
 Author: Bikash Pokhrel
@@ -50,7 +50,8 @@ Type `bigsansar init` command for **automatically** setup server for internal co
 # for full setup in to server 
 
 this is work only on ubuntu os 
-type `sudo bigsansar setup_server` commend for fully setup into server .
+1) type `sudo pip install bigsansar` 
+2) type `sudo bigsansar setup_server` commend for fully setup into server .
 
 
 # some usefull link 
