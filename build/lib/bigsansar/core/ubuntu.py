@@ -49,6 +49,12 @@ def deploy():
         # Write the formatted text to the file
         file.write(chroot_text)
 
+    # global settings of apache2
+    apache2_conf = '/usr/local/lib/%s/dist-packages/bigsansar/etc/apache2.conf' % (pyversion)
+    apache2_to = '/etc/apache2/'
+    shutil.copy(apache2_conf, apache2_to)
+
+
 
     print('secure on firewall...................................................')
     ufw = "sudo ufw allow OpenSSH && sudo ufw allow Apache && sudo ufw allow  'Apache Full' && sudo ufw allow 'Apache Secure'"
@@ -56,7 +62,7 @@ def deploy():
 
 
     # allow all module of server 
-    package = "sudo a2enmod cgi"
+    package = "sudo a2enmod cgi && sudo a2ensite 000-default.conf && sudo a2enmod ssl && sudo a2ensite default-ssl.conf && sudo a2enmod rewrite"
     os.system(package)
 
     print('restarting all service ...........................................')

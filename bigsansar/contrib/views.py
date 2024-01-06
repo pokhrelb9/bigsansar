@@ -1,9 +1,11 @@
-
-from bigsansar.contrib.cgi_base import read_template
+from bigsansar.contrib.cgi_base import read_template, base_template_file,base_template,render
 
 
 def index_page():
-    return read_template('templates/admin/login.html')
+   
+    template =  read_template(base_template_file + 'admin/login.html')
+    content =  render(template, title="Index Page", content="Welcome to the Index Page!")
+    return render(base_template, title="My Page", body=content)
 
 
 def about_page():
@@ -15,4 +17,4 @@ def contact_page():
 
 
 def not_found_page():
-    return read_template('templates/404.html')
+    return read_template(base_template_file + 'templates/404.html')

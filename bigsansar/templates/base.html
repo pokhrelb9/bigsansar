@@ -9,9 +9,8 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-	{% load static %}
 	<!-- head tag css and script -->
-	<link rel="shortcut icon" type="image/x-icon" href="{% static 'logo.png' %}">
+	<link rel="shortcut icon" type="image/x-icon" href="logo.png">
 
 	<!-- for icon -->
 	<!-- Our project just needs Font Awesome Free's Solid and Brand files -->
@@ -20,7 +19,7 @@
     <link href="{% static 'fontawesomefree/css/solid.css' %}" rel="stylesheet" type="text/css">
 
 
-	<title>{% block title %} Bigsansar - create your own site {% endblock %}</title>
+	<title>{{ title }}</title>
 
 	<!-- style for own customization -->
 
@@ -29,11 +28,8 @@
 
 	<!-- for head tag -->
 
-
-	{% block head %} {% endblock %}
 </head>
 <body>
-
-{% block body %} {% endblock %}
+{{ body }}
 </body>
 </html>

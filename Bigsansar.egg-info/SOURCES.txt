@@ -16,6 +16,7 @@ bigsansar/tests.py
 bigsansar/urls.py
 bigsansar/views.py
 bigsansar/contrib/__init__.py
+bigsansar/contrib/cgi_base.py
 bigsansar/contrib/urls.py
 bigsansar/contrib/views.py
 bigsansar/contrib/account/__init__.py
@@ -75,6 +76,7 @@ bigsansar/core/__init__.py
 bigsansar/core/host.py
 bigsansar/core/init.py
 bigsansar/core/ubuntu.py
+bigsansar/etc/apache2.conf
 bigsansar/etc/chroot_v1.zip
 bigsansar/etc/serve-cgi-bin.conf
 bigsansar/etc/sshd_config
