@@ -1,11 +1,8 @@
 ## New update
-
+* admin pannel can access only staff and superuser
 * added Bigsansar New Update system
 * added new admin pannel access from /admin path
 * sitemap , javascript and styles.css system can edit manually from pages
-* now sitemap system can add or edit manually 
-* fixed control system for superuser and normal user in to custom domain and blog post modols.
-* fixed visitor system in to blog post.
 
  
 # How to get Bigsansar

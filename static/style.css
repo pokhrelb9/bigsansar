@@ -45,3 +45,7 @@ color:red;
 
 
 
+/* Add this CSS to your stylesheets */
+.messages .error {
+  color: red;
+}

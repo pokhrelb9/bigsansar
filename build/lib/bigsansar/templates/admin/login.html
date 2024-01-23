@@ -11,16 +11,12 @@
 <!-- for description-->
 
 {% if messages %}
-       {% for message in messages %}
-      {% if message.tags %}
-              <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
-          {{ message }}
-          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
-          </button>
-        </div>
-      {% endif %}
-      {% endfor %}
-      {% endif %}
+    <ul class="messages">
+        {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+{% endif %}
 
 
 <div class="wrapper">
@@ -30,7 +26,7 @@
         {{form.as_p}}
         <p class="text-center"><a href="/lostpass">Forget Password?</a></p>
         <p class="text-center"><button type="submit" class="btn btn-lg btn-primary btn-block">Login</button>
-        <a class="btn btn-lg btn-dark btn-block" href="/signup" role="button">Sign Up</a></p>
+        <!-- <a class="btn btn-lg btn-dark btn-block" href="/signup" role="button">Sign Up</a></p> -->
 
     </form>
 </div>

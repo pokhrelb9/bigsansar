@@ -207,7 +207,7 @@
                                                 <i class="material-icons text-info me-2">Bigsansar</i>New Update
                                             </h6>
                                         </th>
-                                        {% if user.is_staff %}
+                                        {% if user.is_superuser %}
                                         <th class='text-right'>
                                             <a href='/admin/notify/update' class='btn btn-primary btn-sm' role='button'><b>+ New</b></a>
                                         {% else %}

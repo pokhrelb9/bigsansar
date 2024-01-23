@@ -1,4 +1,4 @@
 virtual_hosts = {
-   'localhost:8000': 'www.urls',
-   'example.com:8000': 'ex.urls',
+   'localhost': 'www.urls',
+   'example.com': 'ex.urls',
 }

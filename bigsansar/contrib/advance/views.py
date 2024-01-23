@@ -1,4 +1,5 @@
 import json
+from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth import login, logout, update_session_auth_hash, authenticate
@@ -18,7 +19,12 @@ def admin_redirect(request):
 @csrf_exempt
 def userlogin(request):
     if request.user.is_authenticated:
-        return redirect('/admin/dashboard')
+
+        if request.user.is_staff:
+            return redirect('/admin/dashboard')
+        else:
+            return render(request, '404.html')
+ 
     else:
         if request.method == "POST":
             fm = loginform(request=request, data=request.POST)
@@ -26,9 +32,12 @@ def userlogin(request):
                 uname = fm.cleaned_data['username']
                 upass = fm.cleaned_data['password']
                 user = authenticate(username=uname, password=upass)
-                if user is not None:
+                if user is not None and user.is_staff:
                     login(request, user)
                     return redirect('/admin/dashboard')
+                
+                else:
+                    messages.error(request, "Invalid credentials or you do not have staff access.")
 
         else:
             fm = loginform()
@@ -43,19 +52,23 @@ def userlogout(request):
 def dashboard(request):
     if request.user.is_authenticated:
 
-        user = request.user
-        getdomain = domains.objects.filter(user=user).order_by('-id')
-        paginator = Paginator(getdomain, 5)
-        page_number = request.GET.get('page')
-        domain = paginator.get_page(page_number)
-        ip = request.META.get('REMOTE_ADDR')
-        res = requests.get('http://ip-api.com/json/'+ip)
-        location_data_one = res.text
-        geo = json.loads(location_data_one)
-        browser = request.META['HTTP_USER_AGENT']
-        update = admin_update.objects.all().order_by('-id')[:5]
-        return render(request, 'admin/dashboard.html', {'blog': update, 'ip': ip, 'geo': geo, 'browser': browser,
-                                                  'domains': domain, })
+        if request.user.is_staff:
+            user = request.user
+            getdomain = domains.objects.filter(user=user).order_by('-id')
+            paginator = Paginator(getdomain, 5)
+            page_number = request.GET.get('page')
+            domain = paginator.get_page(page_number)
+            ip = request.META.get('REMOTE_ADDR')
+            res = requests.get('http://ip-api.com/json/'+ip)
+            location_data_one = res.text
+            geo = json.loads(location_data_one)
+            browser = request.META['HTTP_USER_AGENT']
+            update = admin_update.objects.all().order_by('-id')[:5]
+            return render(request, 'admin/dashboard.html', {'blog': update, 'ip': ip, 'geo': geo, 'browser': browser,
+                                                    'domains': domain, })
+        
+        else:
+            return render(request, '404.html')
 
     else:
         return redirect('/admin')
@@ -64,32 +77,42 @@ def dashboard(request):
 
 def chuname(request):
     if request.user.is_authenticated:
-        if request.method == 'POST':
-            fm = userchform(request.POST, instance=request.user)
-            if fm.is_valid():
-                fm.save()
-                messages.success(request, 'Username Changed Successfully')
-                return redirect('/admin/dashboard')
+        if request.user.is_staff:
 
+            if request.method == 'POST':
+                fm = userchform(request.POST, instance=request.user)
+                if fm.is_valid():
+                    fm.save()
+                    messages.success(request, 'Username Changed Successfully')
+                    return redirect('/admin/dashboard')
+
+            else:
+                fm = userchform(instance=request.user)
+            return render(request, 'admin/chuname.html', {'form': fm})
+        
         else:
-            fm = userchform(instance=request.user)
-        return render(request, 'admin/chuname.html', {'form': fm})
+            return render(request, '404.html')
     else:
         return redirect('/admin')
     
 
 def chpass(request):
     if request.user.is_authenticated:
-        if request.method == 'POST':
-            form = chpassform(user=request.user, data=request.POST)
-            if form.is_valid():
-                form.save()
-                update_session_auth_hash(request, form.user)
-                messages.success(request, 'Password Changed Successfully')
-                return redirect('/admin/dashboard')
+        if request.user.is_staff:
+
+            if request.method == 'POST':
+                form = chpassform(user=request.user, data=request.POST)
+                if form.is_valid():
+                    form.save()
+                    update_session_auth_hash(request, form.user)
+                    messages.success(request, 'Password Changed Successfully')
+                    return redirect('/admin/dashboard')
+            else:
+                form = chpassform(user=request.user)
+            return render(request, 'admin/chpass.html', {'form': form})
+        
         else:
-            form = chpassform(user=request.user)
-        return render(request, 'admin/chpass.html', {'form': form})
+            return render(request, '404.html')
 
     else:
         return redirect('/admin')
@@ -97,19 +120,24 @@ def chpass(request):
 
 def editprofile(request):
     if request.user.is_authenticated:
-        if request.method == 'POST':
-            form = profileform(request.POST, instance=request.user)
-            form1 = usrinfoform(request.POST, instance=request.user.userinfo)
-            if form.is_valid() and form1.is_valid():
-                form.save()
-                form1.save()
-                messages.success(request, 'Profile Successfully Updated')
-                return redirect('/admin/dashboard')
+        if request.user.is_staff:
 
+            if request.method == 'POST':
+                form = profileform(request.POST, instance=request.user)
+                form1 = usrinfoform(request.POST, instance=request.user.userinfo)
+                if form.is_valid() and form1.is_valid():
+                    form.save()
+                    form1.save()
+                    messages.success(request, 'Profile Successfully Updated')
+                    return redirect('/admin/dashboard')
+
+            else:
+                form = profileform(instance=request.user)
+                form1 = usrinfoform(instance=request.user.userinfo)
+            return render(request, 'admin/editprofile.html', {'form': form, 'form1': form1})
+        
         else:
-            form = profileform(instance=request.user)
-            form1 = usrinfoform(instance=request.user.userinfo)
-        return render(request, 'admin/editprofile.html', {'form': form, 'form1': form1})
+            return render(request, '404.html')
 
     else:
         return redirect('/admin')
@@ -119,7 +147,7 @@ def editprofile(request):
 def admin_update_fun(request):
 
     if request.user.is_authenticated:
-        if request.user.is_staff:
+        if request.user.is_superuser:
             if request.method == 'POST':
                 form = custom_admin_upadte(request.POST)
                 if form.is_valid():
