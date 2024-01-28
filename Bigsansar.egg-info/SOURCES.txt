@@ -73,10 +73,12 @@ bigsansar/contrib/sites/templatetags/pages.py
 bigsansar/core/__init__.py
 bigsansar/core/host.py
 bigsansar/core/init.py
+bigsansar/core/pip_package.py
+bigsansar/core/setup_linux_server.py
 bigsansar/core/ubuntu.py
+bigsansar/etc/000-default.conf
 bigsansar/etc/apache2.conf
-bigsansar/etc/chroot_v1.zip
-bigsansar/etc/serve-cgi-bin.conf
+bigsansar/etc/config_chroot.sh
 bigsansar/etc/sshd_config
 bigsansar/management/__init__.py
 bigsansar/management/commands/__init__.py

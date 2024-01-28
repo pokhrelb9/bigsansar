@@ -1,26 +1,12 @@
 import os
 import shutil
+import site
 
+from bigsansar.core.server_config_file import call_ssh
 
-
-
-def initsetup():
-
-    if os.path.isdir('www') == True:
-
-        print('RE-Configuring now')
-        print('removing related file and folider')
-        os.remove('manage.py')
-        shutil.rmtree('public_html')
-        print('re installing internal package')
-        return config()
-
-    else:
-        return config()
-
-def config():
+def init_setup():
         
-        cmd = 'django-admin startproject public_html .'
+        cmd = 'sudo django-admin startproject public_html /var/www/'
         print('creating a server .............')
         os.system(cmd)
         print('please wait...')
@@ -31,16 +17,16 @@ def config():
                       "\n}"
 
         print('we are creating files...')
-        f = open("VirtualHost.py", "w")
+        f = open("/var/www/VirtualHost.py", "w")
         print(f)
         f.write(get_content)
         f.close()
 
-        with open('public_html/settings.py', 'r') as fp:
+        with open('/var/www/public_html/settings.py', 'r') as fp:
             # read all lines in a list
             lines = fp.readlines()
             count = 0
-            f = open('public_html/settings.py', 'w')
+            f = open('/var/www/public_html/settings.py', 'w')
 
             for line in lines:
                 # check if string present on a current line
@@ -139,7 +125,7 @@ def config():
             f.close()
 
         # Open a file with access mode 'a'
-        with open("public_html/urls.py", "w") as file_object:
+        with open("/var/www/public_html/urls.py", "w") as file_object:
             # Append 'hello' at the end of file
             file_object.write(''
                               'from django.conf import settings'
@@ -172,7 +158,7 @@ def config():
             file_object.close()
 
         # Open a file with access mode 'a'
-        with open("public_html/settings.py", "a") as append_posgre:
+        with open("/var/www/public_html/settings.py", "a") as append_posgre:
             # Append 'postgres' at the end of file
             append_posgre.write(""
                               "# DATABASES = {"
@@ -219,7 +205,7 @@ def config():
             # Close the file
             append_posgre.close()
 
-        with open("public_html/wsgi.py", "w") as wsgifile:
+        with open("/var/www/public_html/wsgi.py", "w") as wsgifile:
 
             wsgifile.write('import os'
                            '\n'
@@ -233,17 +219,14 @@ def config():
 
             wsgifile.close()
 
-        cmd1 = 'python3 manage.py migrate'
-        cmd2 = 'python3 manage.py collectstatic'
-
-        os.system(cmd1)
+        cmd2 = 'sudo python3 /var/www/manage.py collectstatic'
         os.system(cmd2)
 
-        with open('public_html/settings.py', 'r') as static:
+        with open('/var/www/public_html/settings.py', 'r') as static:
             # read all lines in a list
             rlines = static.readlines()
             count = 0
-            sf = open('public_html/settings.py', 'w')
+            sf = open('/var/www/public_html/settings.py', 'w')
 
             for line in rlines:
                 # check if string present on a current line
@@ -275,3 +258,75 @@ def config():
             sf.close()
 
         print('Finished')
+    
+
+
+
+def deploy_server():
+    
+
+    cmd1 = "sudo apt update  && sudo apt upgrade -y"
+    os.system(cmd1)
+
+
+    
+    print('we are installing some ubuntu package for configurations....')
+    cmd2 = "sudo apt install openssh-server ufw apache2 libapache2-mod-wsgi-py3 postgresql postgresql-contrib libpq-dev -y"
+    os.system(cmd2)
+
+    print(' RE-Configuring internal setiings now.................................................................')
+
+    init_setup()
+    
+
+    print('secure on firewall...................................................')
+    ufw = "sudo ufw allow OpenSSH && sudo ufw allow Apache && sudo ufw allow  'Apache Full' && sudo ufw allow 'Apache Secure' && sudo ufw allow 8000"
+    os.system(ufw)
+
+    print('configuration of apache2.....')
+    chown_mod = 'sudo chown www-data /var/www && sudo chmod 775 /var/www'
+    os.system(chown_mod)
+
+    # for main setting of apache2
+    lib_loc = site.getsitepackages()[0]
+    
+    # Construct the full path to the installed package directory
+    
+    big_loc = os.path.join(lib_loc, 'bigsansar')
+
+    big_path = big_loc + '/etc/apache2.conf'
+    shutil.copy(big_path, '/etc/apache2/apache2.conf')
+    
+
+    http_conf = big_loc + '/etc/000-default.conf'
+    shutil.copy(http_conf, '/etc/apache2/sites-available/000-default.conf')
+
+    #configuring in to 000-default.conf
+
+    # postgresql setting here 
+
+    #makemigration and migrate in to postgresql
+    migrate = 'sudo python3 /var/www/manage.py makemigrations && sudo python3 /var/www/manage.py migrate' 
+    os.system(migrate)
+    
+    # allow all module of server 
+    package = "sudo a2ensite 000-default.conf && sudo a2enmod ssl && sudo a2ensite default-ssl.conf && sudo a2enmod wsgi"
+    os.system(package)
+
+    site_packages = site.getsitepackages()[0]
+    
+    # Construct the full path to the installed package directory
+    
+    package_dir = os.path.join(site_packages, 'bigsansar')
+
+    get_full_path = package_dir + '/etc/config_chroot.sh'
+    # make
+    print('restarting all service ...........................................')
+    restart = "sudo %s && sudo sudo service apache2 restart && sudo ufw enable" % (get_full_path)
+    os.system(restart)
+
+
+    print('checking the service status........................................................ ')
+
+    check = "sudo service ssh status && sudo service apache2 status && sudo service ufw status"
+    os.system(check)

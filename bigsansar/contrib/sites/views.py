@@ -10,7 +10,7 @@ from bigsansar.contrib.sites.models import domains, pages
 from django.utils.text import slugify
 from django.core.exceptions import ValidationError
 
-from www.settings import BASE_DIR
+from public_html.settings import BASE_DIR
 
 # Create your views here.
 

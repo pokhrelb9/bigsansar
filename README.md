@@ -1,8 +1,7 @@
 ## New update
+* bigsansar init no longer support in future 
 * admin pannel can access only staff and superuser
 * added Bigsansar New Update system
-* added new admin pannel access from /admin path
-* sitemap , javascript and styles.css system can edit manually from pages
 
  
 # How to get Bigsansar

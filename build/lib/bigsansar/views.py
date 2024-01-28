@@ -1,6 +1,6 @@
 import datetime
 import os
-from www.settings import BASE_DIR
+from public_html.settings import BASE_DIR
 from django.contrib.sites.shortcuts import get_current_site
 from django.http import HttpResponse
 from django.shortcuts import render

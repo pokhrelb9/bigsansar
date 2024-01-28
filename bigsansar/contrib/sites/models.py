@@ -4,7 +4,7 @@ import shutil
 from django.contrib.auth.models import User
 from django.db import models
 
-from www.settings import BASE_DIR
+from public_html.settings import BASE_DIR
 
 
 # Create your models here.
