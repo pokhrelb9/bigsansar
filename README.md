@@ -25,6 +25,7 @@ for playlist:
 # Get the latest development version
 
 
+
 The latest and greatest Bigsasnar version is the one that’s in our Git repository (our revision-control system). This is only for experienced users who want to try incoming changes and help identify bugs before an official release. Get it using this shell command, which requires [Git](https://https://git-scm.com/):
 
 `git clone https://github.com/pokhrelb9/bigsansar.git`
