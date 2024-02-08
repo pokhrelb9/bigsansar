@@ -8,7 +8,7 @@
 # How to get Bigsansar
 
 Bigsansar is available open-source under the [MIT](https://en.wikipedia.org/wiki/MIT_License) license. We recommend using the latest version of Python 3.
-Bigsansar is Fully based on django and linux ubuntu.
+Bigsansar is Fully based on django and linux ubuntu.  You can use [bigsansar](https://bigsansar.com) for install packaged.
 You can use
 [bigsansar](https://bigsansar.com)
 for install packaged.
@@ -18,6 +18,18 @@ view our tutorials in
 
 for playlist:
 [bigsansar for django](https://www.youtube.com/playlist?list=PLqdXqRSrD-LC6i7YQAaqB57FaCfWEZkth)
+
+
+
+
+# Get the latest development version
+
+
+The latest and greatest Bigsasnar version is the one that’s in our Git repository (our revision-control system). This is only for experienced users who want to try incoming changes and help identify bugs before an official release. Get it using this shell command, which requires [Git](https://https://git-scm.com/):
+
+`git clone https://github.com/pokhrelb9/bigsansar.git`
+
+You can also download a [gzipped tarball](https://https://pypi.org/project/Bigsansar/#files) of the development version. This archive is updated every time we commit code.
 
 
 # After you install bigsansar
@@ -31,6 +43,8 @@ this is work only on ubuntu os
 1) type `sudo pip install bigsansar` 
 2) type `sudo bigsansar setup_server` commend for fully setup into server .
 
+[How to Setup a Full Server with BigSansar, Django, and Ubuntu
+](https://https://youtu.be/EoeWpqOs194?si=6ejm5qKFMBb1xILG)
 
 # some usefull link 
 [sitemap.xml](http://localhost/sitemap.xml)
