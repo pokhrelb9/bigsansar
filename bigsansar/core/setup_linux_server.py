@@ -2,7 +2,6 @@ import os
 import shutil
 import site
 
-from bigsansar.core.server_config_file import call_ssh
 
 def init_setup():
         
@@ -12,7 +11,7 @@ def init_setup():
         print('please wait...')
 
         get_content = "virtual_hosts = {" \
-                      "\n   'localhost': 'public_html.urls'," \
+                      "\n   '127.0.0.1': 'public_html.urls'," \
                       "\n   'example.com': 'ex.urls'," \
                       "\n}"
 
@@ -108,7 +107,7 @@ def init_setup():
 
                     # delete lines
                     del lines[rooturlindex]
-
+               
                 elif line.find("'DIRS': [],") != -1:
                     getlinetemplate = lines.index(line)
 
@@ -161,25 +160,6 @@ def init_setup():
         with open("/var/www/public_html/settings.py", "a") as append_posgre:
             # Append 'postgres' at the end of file
             append_posgre.write(""
-                              "# DATABASES = {"
-                              "\n"
-                              "#     'default': {"
-                              "\n"
-                              "#         'ENGINE': 'django.db.backends.postgresql',"
-                              "\n"
-                              "#         'NAME': 'database_name',"
-                              "\n"
-                              "#         'USER': 'username',"
-                              "\n"
-                              "#         'PASSWORD': 'password',"
-                              "\n"
-                              "#         'HOST': 'localhost',"
-                              "\n"
-                              "#         'PORT': '',"
-                              "\n"
-                              "#     }"
-                              "\n"
-                              "# }"
                               "\n"
                               "\n"
                               "CKEDITOR_CONFIGS = {"
@@ -257,6 +237,28 @@ def init_setup():
             sf.write(staticcontents)
             sf.close()
 
+        file_path = "/var/www/public_html/settings.py"
+        # Text to be deleted
+        text_to_delete = '''
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
+}
+'''
+        # Read the content of the file
+        with open(file_path, 'r') as file:
+            content = file.read()
+
+        # Remove the specified text
+        modified_content = content.replace(text_to_delete, '')
+
+        # Write the modified content back to the file
+        with open(file_path, 'w') as file:
+            file.write(modified_content)
+
+        print("Text removed successfully.")
         print('Finished')
     
 
@@ -284,7 +286,17 @@ def deploy_server():
     os.system(ufw)
 
     print('configuration of apache2.....')
-    chown_mod = 'sudo chown www-data /var/www && sudo chmod 775 /var/www'
+    final_directory = '/var/www/ssl'
+    if not os.path.exists(final_directory):
+                os.makedirs(final_directory)
+                
+    else:
+         print('already exit............')
+
+    ssl_cmd = 'sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /var/www/ssl/ssl-cert-snakeoil.key -out /var/www/ssl/ssl-cert-snakeoil.pem'
+    os.system(ssl_cmd)
+
+    chown_mod = 'sudo chown -R www-data /var/www && sudo chmod -R 775 /var/www'
     os.system(chown_mod)
 
     # for main setting of apache2
@@ -297,18 +309,33 @@ def deploy_server():
     big_path = big_loc + '/etc/apache2.conf'
     shutil.copy(big_path, '/etc/apache2/apache2.conf')
     
-
+    #configuring in to 000-default.conf
     http_conf = big_loc + '/etc/000-default.conf'
     shutil.copy(http_conf, '/etc/apache2/sites-available/000-default.conf')
 
-    #configuring in to 000-default.conf
+    # for ssl 
+    ssl_conf = big_loc + '/etc/default-ssl.conf'
+    shutil.copy(ssl_conf, '/etc/apache2/sites-available/default-ssl.conf')
+    
 
     # postgresql setting here 
+    psycopy2 = 'sudo pip install psycopg2'
+    os.system(psycopy2)
+    
+    # for main setting of postgres
+    postgres_loc = site.getsitepackages()[0]
+    big_loc_db = os.path.join(postgres_loc, 'bigsansar')
 
+    cmd_db = 'sudo python3 %s/etc/db.py' % (big_loc_db)
+    os.system(cmd_db)
+
+    
     #makemigration and migrate in to postgresql
     migrate = 'sudo python3 /var/www/manage.py makemigrations && sudo python3 /var/www/manage.py migrate' 
     os.system(migrate)
-    
+
+    print('creating superuser for access to the admin pannel ...............................')
+    os.system('sudo python3 /var/www/manage.py createsuperuser')
     # allow all module of server 
     package = "sudo a2ensite 000-default.conf && sudo a2enmod ssl && sudo a2ensite default-ssl.conf && sudo a2enmod wsgi"
     os.system(package)
@@ -328,5 +355,5 @@ def deploy_server():
 
     print('checking the service status........................................................ ')
 
-    check = "sudo service ssh status && sudo service apache2 status && sudo service ufw status"
+    check = "sudo service ssh status && sudo service ufw status && sudo service apache2 status"
     os.system(check)
