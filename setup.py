@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setuptools.setup(
     name="Bigsansar",
-    version="2.3.1",
+    version="2.3.2",
     author="Bikash Pokhrel",
     author_email="bigsansaroffice@gmail.com",
     description="Build one in minutes with bigsansar - a visual site building tool!",
@@ -13,7 +13,7 @@ setuptools.setup(
     long_description_content_type="text/markdown",
     url="https://bigsansar.com",
     project_urls={
-        
+        "Bug Tracker": "https://github.com/pokhrelb9/bigsansar/issues",
         "Documentations": "https://docs.bigsansar.com/"
     },
     classifiers=[
@@ -23,7 +23,7 @@ setuptools.setup(
         "Operating System :: OS Independent",
     ],
 
-    packages=setuptools.find_packages(exclude=("www",
+    packages=setuptools.find_packages(exclude=("public_html",
                                                "static",
                                                )),
     #packages=['bigsansar'],
