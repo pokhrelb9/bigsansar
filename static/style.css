@@ -1,0 +1,51 @@
+/* Show it is fixed to the top */
+
+body
+{
+  min-height: 75rem;
+  padding-top: 4.5rem;
+  background: #eee;
+}
+
+.wrapper
+{
+margin: 80px;
+}
+
+.form
+{
+max-width: 380px;
+margin: 0 auto;
+background-color: #fff;
+padding: 15px 40px 50px;
+border: 1px solid #e5e5e5;
+border-radius: 10px;
+}
+
+.form .form-heading
+{
+margin-bottom: 30px;
+}
+
+.form input[type="text"], .form input[type="password"]
+{
+margin-bottom: 20px;
+}
+
+.form .form-control
+{
+padding: 10px;
+}
+
+ul.errorlist
+{
+color:red;
+}
+
+
+
+
+/* Add this CSS to your stylesheets */
+.messages .error {
+  color: red;
+}
