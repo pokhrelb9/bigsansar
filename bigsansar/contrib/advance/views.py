@@ -7,7 +7,7 @@ from django.core.paginator import Paginator
 import requests
 from bigsansar.contrib.advance.forms import chpassform, custom_admin_upadte, loginform, profileform, userchform, usrinfoform
 from bigsansar.contrib.advance.models import admin_update
-from bigsansar.contrib.sites.models import domains
+from bigsansar.contrib.sites.models import default_domain, domains
 from django.contrib import messages
 
 
@@ -21,7 +21,15 @@ def userlogin(request):
     if request.user.is_authenticated:
 
         if request.user.is_staff:
-            return redirect('/admin/dashboard')
+           
+                    try:
+                        get_default_domain = default_domain.objects.get(user=request.user)
+                    except:
+                        return redirect('/admin/domain/create')
+                    else:
+
+                        url_get = "/admin/domain/manage/%s" % (get_default_domain.domain.id)
+                        return redirect(url_get)
         else:
             return render(request, '404.html')
  
@@ -34,7 +42,14 @@ def userlogin(request):
                 user = authenticate(username=uname, password=upass)
                 if user is not None and user.is_staff:
                     login(request, user)
-                    return redirect('/admin/dashboard')
+                    try:
+                        get_default_domain = default_domain.objects.get(user=request.user)
+                    except:
+                        return redirect('/admin/domain/create')
+                    else:
+
+                        url_get = "/admin/domain/manage/%s" % (get_default_domain.domain.id)
+                        return redirect(url_get)
                 
                 else:
                     messages.error(request, "Invalid credentials or you do not have staff access.")
@@ -49,7 +64,7 @@ def userlogout(request):
     return redirect('/admin')
 
 
-def dashboard(request):
+def account(request):
     if request.user.is_authenticated:
 
         if request.user.is_staff:
@@ -64,7 +79,7 @@ def dashboard(request):
             geo = json.loads(location_data_one)
             browser = request.META['HTTP_USER_AGENT']
             update = admin_update.objects.all().order_by('-id')[:5]
-            return render(request, 'admin/dashboard.html', {'blog': update, 'ip': ip, 'geo': geo, 'browser': browser,
+            return render(request, 'admin/account_info.html', {'blog': update, 'ip': ip, 'geo': geo, 'browser': browser,
                                                     'domains': domain, })
         
         else:
@@ -78,17 +93,19 @@ def dashboard(request):
 def chuname(request):
     if request.user.is_authenticated:
         if request.user.is_staff:
+            user = request.user
+            getdomain = domains.objects.filter(user=user).order_by('-id')
 
             if request.method == 'POST':
                 fm = userchform(request.POST, instance=request.user)
                 if fm.is_valid():
                     fm.save()
                     messages.success(request, 'Username Changed Successfully')
-                    return redirect('/admin/dashboard')
+                    return redirect('/admin/account')
 
             else:
                 fm = userchform(instance=request.user)
-            return render(request, 'admin/chuname.html', {'form': fm})
+            return render(request, 'admin/chuname.html', {'form': fm, 'domains': getdomain})
         
         else:
             return render(request, '404.html')
@@ -99,6 +116,8 @@ def chuname(request):
 def chpass(request):
     if request.user.is_authenticated:
         if request.user.is_staff:
+            user = request.user
+            getdomain = domains.objects.filter(user=user).order_by('-id')
 
             if request.method == 'POST':
                 form = chpassform(user=request.user, data=request.POST)
@@ -106,10 +125,10 @@ def chpass(request):
                     form.save()
                     update_session_auth_hash(request, form.user)
                     messages.success(request, 'Password Changed Successfully')
-                    return redirect('/admin/dashboard')
+                    return redirect('/admin/account')
             else:
                 form = chpassform(user=request.user)
-            return render(request, 'admin/chpass.html', {'form': form})
+            return render(request, 'admin/chpass.html', {'form': form, 'domains': getdomain})
         
         else:
             return render(request, '404.html')
@@ -121,6 +140,8 @@ def chpass(request):
 def editprofile(request):
     if request.user.is_authenticated:
         if request.user.is_staff:
+            user = request.user
+            getdomain = domains.objects.filter(user=user).order_by('-id')
 
             if request.method == 'POST':
                 form = profileform(request.POST, instance=request.user)
@@ -129,12 +150,12 @@ def editprofile(request):
                     form.save()
                     form1.save()
                     messages.success(request, 'Profile Successfully Updated')
-                    return redirect('/admin/dashboard')
+                    return redirect('/admin/account')
 
             else:
                 form = profileform(instance=request.user)
                 form1 = usrinfoform(instance=request.user.userinfo)
-            return render(request, 'admin/editprofile.html', {'form': form, 'form1': form1})
+            return render(request, 'admin/editprofile.html', {'form': form, 'form1': form1, 'domains': getdomain})
         
         else:
             return render(request, '404.html')
@@ -148,6 +169,9 @@ def admin_update_fun(request):
 
     if request.user.is_authenticated:
         if request.user.is_superuser:
+            user = request.user
+            getdomain = domains.objects.filter(user=user).order_by('-id')
+
             if request.method == 'POST':
                 form = custom_admin_upadte(request.POST)
                 if form.is_valid():
@@ -155,11 +179,11 @@ def admin_update_fun(request):
                     q.user = request.user
                     q.save()
                     messages.success(request, 'admin updated Successfully Created')
-                    return redirect('/admin/dashboard')
+                    return redirect('/admin')
 
             else:
                 form = custom_admin_upadte()
-            return render(request, 'admin/admin_update.html', {'form': form,})
+            return render(request, 'admin/admin_update.html', {'form': form, 'domains': getdomain,})
 
         else:
             return render(request, '404.html')

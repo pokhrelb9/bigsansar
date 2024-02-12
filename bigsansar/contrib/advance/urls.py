@@ -5,7 +5,7 @@ from bigsansar.contrib.advance import views
 
 urlpatterns = [
     path('', views.userlogin),
-    path('dashboard', views.dashboard),
+    path('account', views.account),
     path('logout', views.userlogout),
     path('bpanel', admin.site.urls),
     path('changeuname', views.chuname, name='changeuname'),

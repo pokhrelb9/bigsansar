@@ -142,3 +142,16 @@ build/lib/bigsansar/templates/admin/nav.html
 build/lib/bigsansar/templates/admin/page_create.html
 build/lib/bigsansar/templates/admin/page_delete.html
 build/lib/bigsansar/templates/admin/page_edit.html
+build/lib/bigsansar/contrib/sites/migrations/0002_default_domain.py
+build/lib/bigsansar/contrib/sites/migrations/0003_domains_default.py
+build/lib/bigsansar/contrib/sites/migrations/0004_alter_domains_default.py
+build/lib/bigsansar/contrib/sites/migrations/0005_remove_domains_default.py
+build/lib/bigsansar/contrib/sites/migrations/0006_default_domain_default_domain_and_more.py
+build/lib/bigsansar/contrib/sites/migrations/0007_alter_default_domain_default_domain.py
+build/lib/bigsansar/contrib/sites/migrations/0008_domains_primary_domain.py
+build/lib/bigsansar/contrib/sites/migrations/0009_remove_default_domain_default_domain.py
+build/lib/bigsansar/templates/admin/account_info.html
+.vscode/settings.json
+dist/Bigsansar-2.3.3-py3-none-any.whl
+dist/Bigsansar-2.3.3.tar.gz
+templates/sdfdsf.fgfd/fdfdfd.html

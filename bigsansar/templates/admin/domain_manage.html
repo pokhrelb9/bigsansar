@@ -36,7 +36,7 @@
 			<nav aria-label="breadcrumb" class="main-breadcrumb">
 			  <ol class="breadcrumb">
 				<li class="breadcrumb-item"><a href="/">Home</a></li>
-				  <li class="breadcrumb-item"><a href="/admin/dashboard">Dashboard</a></li>
+				  <li class="breadcrumb-item"><a href="/admin/account">Account</a></li>
 				<li class="breadcrumb-item active" aria-current="page">{{ host.domain }}</li>
 			  </ol>
 			</nav>
@@ -53,9 +53,9 @@
 								<h4>{{ request.user }}</h4>
 
 								<p class="text-muted font-size-sm">{{ request.user.userinfo.address }}</p>
-								<!--                      <button class="btn btn-primary">Upgrades</button>-->
-<!--								<a href="/admin" class="btn btn-outline-primary" role="button" target="__blank" aria-pressed="true">Admin Panel</a>-->
-							</div>
+								{% if request.user.is_staff %}
+                      <a href="/admin/bpanel" class="btn btn-outline-primary" role="button" target="__blank" aria-pressed="true">Admin Panel</a>
+	                            {% endif %}</div>
 						</div>
 					</div>
 				</div>

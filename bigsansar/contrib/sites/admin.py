@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.contrib.admin import SimpleListFilter
 from django.utils.translation import gettext_lazy as _
 from bigsansar.contrib.sites.forms import create_domainform, customaddpageform, custompageform
-from bigsansar.contrib.sites.models import domains, pages
+from bigsansar.contrib.sites.models import default_domain, domains, pages
 from django.contrib.auth.models import User
 
 

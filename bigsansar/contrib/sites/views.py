@@ -4,9 +4,9 @@ from django.shortcuts import redirect, render
 from django.core.paginator import Paginator
 import requests
 from bigsansar.contrib.advance.models import admin_update
-from bigsansar.contrib.sites.forms import create_domainform, customviewseditpage, customviewspageform
+from bigsansar.contrib.sites.forms import create_domainform, customviewseditpage, customviewspageform, edit_domainform
 from django.contrib import messages
-from bigsansar.contrib.sites.models import domains, pages
+from bigsansar.contrib.sites.models import default_domain, domains, pages
 from django.utils.text import slugify
 from django.core.exceptions import ValidationError
 
@@ -34,7 +34,8 @@ def manage_domain(request, id):
 
                 else:
                     visitor = 'Active'
-
+                user = request.user
+                domain = domains.objects.filter(user=user).order_by('-id')
                 getpage = pages.objects.filter(domain=id).order_by('-id')
                 paginator = Paginator(getpage, 5)
                 page_number = request.GET.get('page')
@@ -47,7 +48,7 @@ def manage_domain(request, id):
                 update = admin_update.objects.all().order_by('-id')[:5]
                 return render(request, 'admin/domain_manage.html', {'visitcount': status, 'count': visitor, 'host': query,
                                                             'pages': page, 'ip': ip, 'geo': geo, 'browser': browser,
-                                                            'blog': update})
+                                                            'blog': update, 'domains': domain })
             
         else:
             return render(request, '404.html')
@@ -60,6 +61,7 @@ def edit_host(request, id):
 
     if request.user.is_authenticated:
         if request.user.is_staff:
+            getdomains = domains.objects.filter(user=request.user).order_by('-id')
 
             try:
                 user = request.user
@@ -70,14 +72,23 @@ def edit_host(request, id):
 
             else:
                 if request.method == 'POST':
-                    form = create_domainform(request.POST, instance=query)
+                    form = edit_domainform(request.POST, instance=query)
                     if form.is_valid():
-                        form.save()
+                        db = form.save(commit=False)
+                        check_default = form.cleaned_data['primary_domaIn']
+                        if check_default is True:
+                            domains.objects.filter(user=request.user, primary_domaIn=True).update(primary_domaIn=False)
+                            default_domain.objects.update_or_create(user=user, defaults={'domain': query})
+
+                        else:
+                            default_domain.objects.filter(user=user).delete()
+                        
+                        db.save()
                         messages.success(request, 'Domain Successfully Updated')
                         return redirect('/admin/domain/manage/' + id)
                 else:
-                    form = create_domainform(instance=query)
-                return render(request, 'admin/edit_domain.html', {'form': form})
+                    form = edit_domainform(instance=query)
+                return render(request, 'admin/edit_domain.html', {'host': query, 'form': form, 'domains': getdomains})
             
         else:
             return render(request, '404.html')
@@ -89,6 +100,7 @@ def edit_host(request, id):
 def page_create(request, id):
     if request.user.is_authenticated:
         if request.user.is_staff:
+            getdomains = domains.objects.filter(user=request.user).order_by('-id')
 
             try:
                 user = request.user
@@ -106,7 +118,7 @@ def page_create(request, id):
                         messages.warning(request, 'page with url' + ' ' + slugify(
                             form.cleaned_data.get('title')) + ' ' + 'already exists for domain' + ' ' + get_host.domain)
                         form = customviewspageform
-                        return render(request, 'admin/page_create.html', {'form': form})
+                        return render(request, 'admin/page_create.html', {'host': get_host, 'form': form, 'domains': getdomains})
 
                     query = form.save(commit=False)
                     query.domain = get_host
@@ -129,7 +141,7 @@ def page_create(request, id):
 
             else:
                 form = customviewspageform
-            return render(request, 'admin/page_create.html', {'form': form})
+            return render(request, 'admin/page_create.html', {'host': get_host, 'form': form, 'domains': getdomains})
         
         else:
             return render(request, '404.html')
@@ -142,6 +154,7 @@ def page_create(request, id):
 def pages_edit(request, id, pagesid):
     if request.user.is_authenticated:
         if request.user.is_staff:
+            getdomains = domains.objects.filter(user=request.user).order_by('-id')
 
             getdir = 'templates'
 
@@ -175,7 +188,7 @@ def pages_edit(request, id, pagesid):
                 else:
                     form = customviewseditpage(instance=query)
 
-                return render(request, 'admin/page_edit.html', {'form': form})
+                return render(request, 'admin/page_edit.html', {'host': query, 'form': form, 'domains': getdomains})
             
         else:
             return render(request, '404.html')
@@ -188,7 +201,7 @@ def pages_edit(request, id, pagesid):
 def page_delete(request, id, pagesid):
     if request.user.is_authenticated:
         if request.user.is_staff:
-
+            getdomains = domains.objects.filter(user=request.user).order_by('-id')
             getdir = 'templates'
 
             try:
@@ -211,7 +224,7 @@ def page_delete(request, id, pagesid):
 
                 messages.success(request, 'Pages Successfully Deleted')
                 return redirect('/admin/domain/manage/' + id)
-            return render(request, 'admin/page_delete.html', {'path': query, 'domain': getdomain})
+            return render(request, 'admin/page_delete.html', {'host': query, 'path': query, 'domain': getdomain, 'domains': getdomains})
         
         else:
             return render(request, '404.html')
@@ -224,6 +237,8 @@ def page_delete(request, id, pagesid):
 def create_domain(request):
     if request.user.is_authenticated:
         if request.user.is_staff:
+            user = request.user
+            getdomain = domains.objects.filter(user=user).order_by('-id')
 
             if request.method == 'POST':
                 form = create_domainform(request.POST)
@@ -233,13 +248,15 @@ def create_domain(request):
                     query.user = request.user
                     query.save()
                     messages.success(request, 'domain Successfully Created')
-                    return redirect('/admin/dashboard')
+                    return redirect('/admin')
 
             else:
                 form = create_domainform()
-            return render(request, 'admin/create_domain.html', {'form': form})
+            return render(request, 'admin/create_domain.html', {'form': form, 'domains': getdomain})
 
         else:
             return render(request, '404.html')
     else:
         return redirect('/admin')
+    
+

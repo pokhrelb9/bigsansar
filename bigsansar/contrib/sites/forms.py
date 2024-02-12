@@ -9,29 +9,6 @@ from bigsansar.contrib.sites.models import domains, pages
 from public_html.settings import BASE_DIR
 
 
-class create_domainform(forms.ModelForm):
-    domain = forms.CharField(max_length=100, min_length=3, validators=[
-        RegexValidator('^[a-z0-9.]+\.[a-z0-9]{1,5}$', message='Please enter your correct domain name')],
-                             widget=forms.TextInput(attrs={'autofocus': True, 'class': 'form-control', }))
-
-    class Meta:
-        model = domains
-        fields = ('domain', 'Description', 'user',)
-
-    def clean(self):
-        getdir = 'templates'
-        gethost = self.cleaned_data.get('domain')
-        mkdir = getdir + '/' + str(gethost)
-        try:
-            final_directory = os.path.join(BASE_DIR, mkdir)
-            if not os.path.exists(final_directory):
-                os.makedirs(final_directory)
-        except:
-            raise ValidationError(
-                _(final_directory + ' Directory not created "Permission Denied"'),
-            )
-
-        return super().clean()
 
 class customaddpageform(forms.ModelForm):
     class Meta:
@@ -129,3 +106,21 @@ class customviewseditpage(forms.ModelForm):
         model = pages
         fields = ('title', 'body',)
         widgets = {'body': forms.Textarea(attrs={'class': 'form-control', 'cols': 90, 'rows': 20})}
+
+        
+
+
+
+
+
+class edit_domainform(forms.ModelForm):
+    domain = forms.CharField(max_length=100, min_length=3, validators=[
+        RegexValidator('^[a-z0-9.]+\.[a-z0-9]{1,5}$', message='Please enter your correct domain name')],
+                             widget=forms.TextInput(attrs={'autofocus': True, 'class': 'form-control', }))
+    
+    Description = forms.CharField(max_length=15, required=True,
+                            widget=forms.TextInput(attrs={'class': 'form-control', 'autofocus': False}))
+
+    class Meta:
+        model = domains
+        fields = ('domain', 'Description', 'primary_domaIn',)

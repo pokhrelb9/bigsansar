@@ -43,15 +43,54 @@
             transition: margin-left .5s;
             padding: 16px;
         }
+
+
+    select {
+    font-size: 0.9rem;
+    padding: 2px 5px;
+    }
+
+    hr {
+   
+    color: white;
+}
+
+.sidenav-menu-heading {
+    padding: 1.75rem 1rem 0.75rem;
+    font-size: 0.7rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #fff;
+}
     </style>
 </head>
 <body>
 
 <div id="mySidebar" class="sidebar">
+        
+    <div class="sidenav-menu-heading">Websites</div>
+    <select onChange="window.location.href=this.value" class="form-select form-select-lg mb-3" aria-label="Large select example">
+        
+    <option selected> {{ host.domain }} </option>
+    <hr/>
+    {% for domains in domains %}
+    <option value="/admin/domain/manage/{{ domains.id }}">{{ domains.domain }}</option>
+    {% endfor %}
+    </select>
     
+    <hr/>
+    {% if host.domain %}
+
     <a href="/admin/dashboard">Dashboard</a>
     <a href="/admin/changeuname">Change Username</a>
-    <a href="/admin/changepass">Change Password</a>
+    <a href="">Settings</a>
+
+    {% else %}
+    <p>dfdfdsf</p>
+
+    {% endif %}
+    
 </div>
 
 <div id="main" class="content">
@@ -89,7 +128,7 @@
 					</a>
 					<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
 						<li>
-							<a class="dropdown-item" href="/admin/dashboard">Dashboard</a>
+							<a class="dropdown-item" href="/admin/account">Account</a>
 						</li>
 						<li>
 							<a class="dropdown-item" href="/admin/changeuname">Change Username</a>

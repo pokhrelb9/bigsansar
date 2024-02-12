@@ -1,7 +1,7 @@
 ## New update
+* customize admin pannel with side bar nav and add some function 
 * now you can install bigsansar package in to ubuntu and all setup with on command lines 
 * bigsansar init no longer support in future 
-* admin pannel can access only staff and superuser
 
 
  

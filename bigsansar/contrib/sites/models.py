@@ -16,6 +16,8 @@ class domains(models.Model):
     Description = models.CharField(max_length=15, default=None)
     publish_date = models.DateField(auto_now_add=True)
     visitor = models.IntegerField(default=1)
+    primary_domaIn = models.BooleanField(default=False)
+    
 
     def __str__(self):
         return self.domain
@@ -73,3 +75,12 @@ class pages(models.Model):
             pass
 
         super().delete()
+
+
+
+class default_domain(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    domain = models.OneToOneField(domains, on_delete=models.CASCADE)
+   
+    
+    
