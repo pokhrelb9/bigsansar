@@ -248,7 +248,7 @@ def create_domain(request):
                     query.user = request.user
                     query.save()
                     messages.success(request, 'domain Successfully Created')
-                    return redirect('/admin')
+                    return redirect('/admin/account')
 
             else:
                 form = create_domainform()
