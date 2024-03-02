@@ -1,4 +1,4 @@
 virtual_hosts = {
-   'localhost': 'public_html.urls',
+   'localhost': 'www.urls',
    'example.com': 'ex.urls',
 }

@@ -11,7 +11,7 @@ def initsetup():
         print('RE-Configuring now')
         print('removing related file and folider')
         os.remove('manage.py')
-        shutil.rmtree('public_html')
+        shutil.rmtree('www')
         print('re installing internal package')
         return config()
 
@@ -20,13 +20,13 @@ def initsetup():
 
 def config():
         
-        cmd = 'django-admin startproject public_html .'
+        cmd = 'django-admin startproject www .'
         print('creating a server .............')
         os.system(cmd)
         print('please wait...')
 
         get_content = "virtual_hosts = {" \
-                      "\n   'localhost': 'public_html.urls'," \
+                      "\n   'localhost': 'www.urls'," \
                       "\n   'example.com': 'ex.urls'," \
                       "\n}"
 
@@ -36,11 +36,11 @@ def config():
         f.write(get_content)
         f.close()
 
-        with open('public_html/settings.py', 'r') as fp:
+        with open('www/settings.py', 'r') as fp:
             # read all lines in a list
             lines = fp.readlines()
             count = 0
-            f = open('public_html/settings.py', 'w')
+            f = open('www/settings.py', 'w')
 
             for line in lines:
                 # check if string present on a current line
@@ -117,7 +117,7 @@ def config():
 
                     lines.insert(xyz, hostcode)
 
-                elif line.find("ROOT_URLCONF = 'public_html.urls'") != -1:
+                elif line.find("ROOT_URLCONF = 'www.urls'") != -1:
                     rooturlindex = lines.index(line)
 
                     # delete lines
@@ -139,7 +139,7 @@ def config():
             f.close()
 
         # Open a file with access mode 'a'
-        with open("public_html/urls.py", "w") as file_object:
+        with open("www/urls.py", "w") as file_object:
             # Append 'hello' at the end of file
             file_object.write(''
                               'from django.conf import settings'
@@ -172,7 +172,7 @@ def config():
             file_object.close()
 
         # Open a file with access mode 'a'
-        with open("public_html/settings.py", "a") as append_posgre:
+        with open("www/settings.py", "a") as append_posgre:
             # Append 'postgres' at the end of file
             append_posgre.write(""
                               "# DATABASES = {"
@@ -219,7 +219,7 @@ def config():
             # Close the file
             append_posgre.close()
 
-        with open("public_html/wsgi.py", "w") as wsgifile:
+        with open("www/wsgi.py", "w") as wsgifile:
 
             wsgifile.write('import os'
                            '\n'
@@ -233,17 +233,17 @@ def config():
 
             wsgifile.close()
 
-        cmd1 = 'python3 manage.py migrate'
-        cmd2 = 'python3 manage.py collectstatic'
+        cmd1 = 'python manage.py migrate'
+        cmd2 = 'python manage.py collectstatic'
 
         os.system(cmd1)
         os.system(cmd2)
 
-        with open('public_html/settings.py', 'r') as static:
+        with open('www/settings.py', 'r') as static:
             # read all lines in a list
             rlines = static.readlines()
             count = 0
-            sf = open('public_html/settings.py', 'w')
+            sf = open('www/settings.py', 'w')
 
             for line in rlines:
                 # check if string present on a current line

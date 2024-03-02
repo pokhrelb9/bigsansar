@@ -6,7 +6,7 @@ from django.core.exceptions import ValidationError
 from django.core.validators import RegexValidator
 from django.utils.translation import gettext_lazy as _
 from bigsansar.contrib.sites.models import domains, pages
-from public_html.settings import BASE_DIR
+from www.settings import BASE_DIR
 
 
 

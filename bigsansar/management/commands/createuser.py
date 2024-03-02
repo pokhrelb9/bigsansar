@@ -5,7 +5,7 @@ from django.core.management.base import BaseCommand
 
 
 class Command(BaseCommand):
-    help = "Closes the specified poll for voting"
+    help = "Create multiple user at once time "
 
     def handle(self, *args, **options):
         print('We are creating User..............')

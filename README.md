@@ -34,18 +34,18 @@ You can also download a [gzipped tarball](https://https://pypi.org/project/Bigsa
 
 
 # After you install bigsansar
-Type `bigsansar init` command for **automatically** setup server for internal configurations.
+1) Type `bigsansar init` command for **automatically** setup server for internal configurations.
 
 ** this command valid into vertualenv for developer 
 
 # for full setup in to server 
 
 this is work only on ubuntu os 
-1) type `sudo pip install bigsansar` 
-2) type `sudo bigsansar setup_server` commend for fully setup into server .
+
+2) type ` python manage.py setup_server` commend for fully setup into server .
 
 [How to Setup a Full Server with BigSansar, Django, and Ubuntu
-](https://https://youtu.be/EoeWpqOs194?si=6ejm5qKFMBb1xILG)
+](https://youtu.be/iEmI0HO_U0E)
 
 # some usefull link 
 [sitemap.xml](http://localhost/sitemap.xml)

@@ -16,7 +16,7 @@ def connectposgres(database_name, username, password):
 
     if cursor_obj:
          # Open a file with access mode 'a'
-            with open("/var/www/public_html/settings.py", "a") as append_posgre:
+            with open("www/settings.py", "a") as append_posgre:
                 # Append 'postgres' at the end of file
                 append_posgre.write(""
                                     "\n"
@@ -62,7 +62,7 @@ def execute_command(command, database_name=None, username=None, password=None):
         else:
 
             # Open a file with access mode 'a'
-            with open("/var/www/public_html/settings.py", "a") as append_posgre:
+            with open("www/settings.py", "a") as append_posgre:
                 # Append 'postgres' at the end of file
                 append_posgre.write(""
                                     "\n"
