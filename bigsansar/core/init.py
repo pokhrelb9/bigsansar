@@ -175,25 +175,6 @@ def config():
         with open("www/settings.py", "a") as append_posgre:
             # Append 'postgres' at the end of file
             append_posgre.write(""
-                              "# DATABASES = {"
-                              "\n"
-                              "#     'default': {"
-                              "\n"
-                              "#         'ENGINE': 'django.db.backends.postgresql',"
-                              "\n"
-                              "#         'NAME': 'database_name',"
-                              "\n"
-                              "#         'USER': 'username',"
-                              "\n"
-                              "#         'PASSWORD': 'password',"
-                              "\n"
-                              "#         'HOST': 'localhost',"
-                              "\n"
-                              "#         'PORT': '',"
-                              "\n"
-                              "#     }"
-                              "\n"
-                              "# }"
                               "\n"
                               "\n"
                               "CKEDITOR_CONFIGS = {"
@@ -226,7 +207,7 @@ def config():
                            'from django.core.wsgi import get_wsgi_application'
                            '\n'
                            '\n'
-                           'os.environ["DJANGO_SETTINGS_MODULE"] = "public_html.settings"'
+                           'os.environ["DJANGO_SETTINGS_MODULE"] = "www.settings"'
                            '\n'
                            'application = get_wsgi_application()'
                            '\n')
