@@ -26,7 +26,7 @@ def config():
         print('please wait...')
 
         get_content = "virtual_hosts = {" \
-                      "\n   'localhost': 'www.urls'," \
+                      "\n   'example1.com': 'www.urls'," \
                       "\n   'example.com': 'ex.urls'," \
                       "\n}"
 
