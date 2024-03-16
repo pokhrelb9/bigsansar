@@ -37,6 +37,23 @@ DATABASES = {
 
     print("Text removed successfully.")
 
+    file_path1 = "www/settings.py"
+        # Text to be deleted
+    debug_true = '''DEBUG = True'''
+
+        # Read the content of the file
+    with open(file_path1, 'r') as file:
+            content = file.read()
+
+        # Remove the specified text
+    modified_content1 = content.replace(debug_true, 'DEBUG = False')
+
+        # Write the modified content back to the file
+    with open(file_path1, 'w') as file:
+            file.write(modified_content1)
+            
+    
+
     os.system('sudo apt update  && sudo apt upgrade -y')
 
     print('we are installing some ubuntu package for configurations....')

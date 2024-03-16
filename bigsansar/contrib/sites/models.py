@@ -13,7 +13,7 @@ from www.settings import BASE_DIR
 class domains(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     domain = models.CharField(max_length=100, unique=True)
-    Description = models.CharField(max_length=15, default=None)
+    Description = models.CharField(max_length=50, default=None)
     publish_date = models.DateField(auto_now_add=True)
     visitor = models.IntegerField(default=1)
     primary_domaIn = models.BooleanField(default=False)

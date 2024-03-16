@@ -1,3 +1,4 @@
+import getpass
 import subprocess
 import psycopg2
 
@@ -114,14 +115,14 @@ if user_input.lower() == 'yes':
     # Replace these with your desired values
     database_name = input("Enter the database name: ")
     username = input("Enter the username: ")
-    password = input("Enter the password: ")
+    password = getpass.getpass(prompt='Enter the password:')
     connectposgres(database_name, username, password)
 
 elif user_input.lower() == 'no':
     # Replace these with your desired values
     database_name = input("Enter the database name: ")
     username = input("Enter the username: ")
-    password = input("Enter the password: ")
+    password = getpass.getpass(prompt='Enter the password:')
 
     create_database_and_user(database_name, username, password)
 

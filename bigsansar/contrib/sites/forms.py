@@ -80,7 +80,7 @@ class create_domainform(forms.ModelForm):
         RegexValidator('^[a-z0-9.]+\.[a-z0-9]{1,5}$', message='Please enter your correct domain name')],
                              widget=forms.TextInput(attrs={'autofocus': True, 'class': 'form-control', }))
     
-    Description = forms.CharField(max_length=15, required=True,
+    Description = forms.CharField(max_length=50, required=True,
                             widget=forms.TextInput(attrs={'class': 'form-control', 'autofocus': False}))
 
     class Meta:

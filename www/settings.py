@@ -20,7 +20,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-cn6hl^%#%a5dh9b-j(83=wxc5o#!67st5wdjw-xwa9p49449vt'
+SECRET_KEY = 'django-insecure-d$)cltu-dfo6ofwltva=cc%s-dt7k^11a9*6aq&oukf_1*37f('
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -96,6 +96,13 @@ WSGI_APPLICATION = 'www.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
+}
+
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
@@ -137,16 +144,7 @@ STATIC_URL = 'files/'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'database_name',
-#         'USER': 'username',
-#         'PASSWORD': 'password',
-#         'HOST': 'localhost',
-#         'PORT': '',
-#     }
-# }
+
 
 CKEDITOR_CONFIGS = {
 'default': {
@@ -158,3 +156,14 @@ CKEDITOR_CONFIGS = {
 
 CKEDITOR_RESTRICT_BY_USER = True
 #CKEDITOR_ALLOW_NONIMAGE_FILES = False
+
+DATABASES = {
+     'default': {
+         'ENGINE': 'django.db.backends.postgresql',
+         'NAME': 'ojdsdsj',
+         'USER': 'sfdsfds',
+         'PASSWORD': 'sdsdssdfdf',
+         'HOST': 'localhost',
+         'PORT': '',
+     }
+}
