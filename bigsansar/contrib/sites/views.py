@@ -3,7 +3,7 @@ import os
 from django.shortcuts import redirect, render
 from django.core.paginator import Paginator
 import requests
-from bigsansar.contrib.advance.models import admin_update
+from bigsansar.contrib.advance.models import SidebarSettings, admin_update
 from bigsansar.contrib.sites.forms import create_domainform, customviewseditpage, customviewspageform, edit_domainform
 from django.contrib import messages
 from bigsansar.contrib.sites.models import default_domain, domains, pages
@@ -46,9 +46,10 @@ def manage_domain(request, id):
                 geo = json.loads(location_data_one)
                 browser = request.META['HTTP_USER_AGENT']
                 update = admin_update.objects.all().order_by('-id')[:5]
+                
                 return render(request, 'admin/domain_manage.html', {'visitcount': status, 'count': visitor, 'host': query,
                                                             'pages': page, 'ip': ip, 'geo': geo, 'browser': browser,
-                                                            'blog': update, 'domains': domain })
+                                                            'blog': update, 'domains': domain})
             
         else:
             return render(request, '404.html')

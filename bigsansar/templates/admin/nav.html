@@ -66,9 +66,20 @@
     </style>
 </head>
 <body>
+    {% if user.is_staff %}
+    {% load nav_bar %}
+    {% post_is_sidebar_open %}
+
+    {% endif %}
 
 <div id="mySidebar" class="sidebar">
-        
+    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+    <form method="post" action="" id="nav_form">
+        {% csrf_token %}
+        <input type="hidden" name="nav_true" value="False"></input>
+        <button type="submit" class="btn-close btn-close-white me-md-2" aria-label="Close"></button>
+    </form>
+   </div>
     <div class="sidenav-menu-heading">Websites</div>
     <select onChange="window.location.href=this.value" class="form-select form-select-lg mb-3" aria-label="Large select example">
         
@@ -98,7 +109,13 @@
 
 	<div class="container-fluid">
 		{% if user.is_staff %}
-        <a href="javascript:void(0)" class="navbar-toggler-icon" onclick="toggleNav()"></a>
+       
+        <form method="post" action="" >
+            {% csrf_token %}
+            <input type="hidden" name="nav_true" value="True"></input>
+            <button type="submit" class="btn navbar-toggler-icon"></button>
+        </form>
+        
         {% else %}
 
         {% endif %}
@@ -162,20 +179,29 @@
 	</div>
 </nav>
 </div>
-
-
+{% if user.is_staff %}
+{% load nav_bar %}
+{% get_is_sidebar_open as nav_ff %} 
+{% endif %}
 <script>
-    function toggleNav() {
+    // Retrieve the boolean value directly from Django variable
+    const isSidebarOpen = JSON.parse('{{ nav_ff.is_sidebar_open|yesno:"true,false" }}');
+    
+    // Function to toggle sidebar based on database boolean value
+    function toggleSidebar() {
         const sidebar = document.getElementById("mySidebar");
         const mainContent = document.getElementById("main");
 
-        if (sidebar.style.width === "250px") {
-            sidebar.style.width = "0";
-            mainContent.style.marginLeft = "0";
-        } else {
+        if (isSidebarOpen) {
             sidebar.style.width = "250px";
             mainContent.style.marginLeft = "250px";
+        } else {
+            
+            sidebar.style.width = "0";
+            mainContent.style.marginLeft = "0";
         }
     }
-</script>
 
+    // Call the toggleSidebar function when the page loads
+    window.onload = toggleSidebar;
+</script>

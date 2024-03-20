@@ -23,3 +23,12 @@ class admin_update(models.Model):
     class Meta:
         verbose_name = 'update'
         verbose_name_plural = 'Admin Update'
+
+
+
+class SidebarSettings(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    is_sidebar_open = models.BooleanField(default=True)  # Boolean field to control sidebar visibility
+
+    def __str__(self):
+        return "Sidebar Settings"

@@ -1,5 +1,7 @@
-from django.contrib import admin
+# from django.contrib import admin
 
-# Register your models here.
+# from bigsansar.contrib.advance.models import SidebarSettings
 
+# # Register your models ha
 
+# admin.site.register(SidebarSettings)

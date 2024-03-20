@@ -5,13 +5,13 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setuptools.setup(
     name="Bigsansar",
-    version="2.4.6",
+    version="2.5.5",
     author="Bikash Pokhrel",
     author_email="bigsansaroffice@gmail.com",
     description="Build one in minutes with bigsansar - a visual site building tool!",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://bigsansar.com",
+    url="https://github.com/pokhrelb9/bigsansar",
     project_urls={
         "Bug Tracker": "https://github.com/pokhrelb9/bigsansar/issues",
         "Documentations": "https://docs.bigsansar.com/"

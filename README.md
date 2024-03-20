@@ -1,10 +1,8 @@
 ## New update
-* secure database password and auto debug false while in productions
-* now you can install bigsansar package in to ubuntu and all setup with on command lines 
-* bigsansar init no longer support in future 
+* fixed some bugs
+* added new db table for nav always open or close.
+* now you can install bigsansar package in to ubuntu and all setup with on command lines
 
-
- 
 # How to get Bigsansar
 
 Bigsansar is available open-source under the [MIT](https://en.wikipedia.org/wiki/MIT_License) license. We recommend using the latest version of Python 3.
@@ -17,7 +15,7 @@ view our tutorials in
 [youtube](https://youtube.com/bigsansar)
 
 for playlist:
-[bigsansar for django](https://www.youtube.com/playlist?list=PLqdXqRSrD-LC6i7YQAaqB57FaCfWEZkth)
+[bigsansar for django](https://www.youtube.com/playlist?list=PLbGzLu1WXrFUXw7qr6AMz5_iEkEAPV_Vs)
 
 
 
