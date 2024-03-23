@@ -70,7 +70,7 @@
     {% load nav_bar %}
     {% post_is_sidebar_open %}
 
-    {% endif %}
+   
 
 <div id="mySidebar" class="sidebar">
     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
@@ -83,15 +83,18 @@
     <div class="sidenav-menu-heading">Websites</div>
     <select onChange="window.location.href=this.value" class="form-select form-select-lg mb-3" aria-label="Large select example">
         
-    <option selected> {{ host.domain }} </option>
+    <option selected>{% host_for_nav %} </option>
     <hr/>
+    
+    {% domain_list_for_nav as domains %}
     {% for domains in domains %}
     <option value="/admin/domain/manage/{{ domains.id }}">{{ domains.domain }}</option>
     {% endfor %}
     </select>
     
     <hr/>
-    {% if host.domain %}
+    {% host_for_nav as per_domain %}
+    {% if per_domain %}
 
     <a href="/admin/dashboard">Dashboard</a>
     <a href="/admin/changeuname">Change Username</a>
@@ -101,7 +104,7 @@
     <p>dfdfdsf</p>
 
     {% endif %}
-    
+    {% endif %}
 </div>
 
 <div id="main" class="content">

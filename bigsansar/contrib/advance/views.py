@@ -10,7 +10,6 @@ from bigsansar.contrib.advance.models import admin_update
 from bigsansar.contrib.sites.models import default_domain, domains
 from django.contrib import messages
 
-
 # Create your views here.
 def admin_redirect(request):
     return redirect('admin/')
@@ -76,7 +75,7 @@ def account(request):
             ip = request.META.get('REMOTE_ADDR')
             res = requests.get('http://ip-api.com/json/'+ip)
             location_data_one = res.text
-            geo = json.loads(location_data_one)
+            geo = json.loads(location_data_one) 
             browser = request.META['HTTP_USER_AGENT']
             update = admin_update.objects.all().order_by('-id')[:5]
             return render(request, 'admin/account_info.html', {'blog': update, 'ip': ip, 'geo': geo, 'browser': browser,
@@ -94,8 +93,7 @@ def chuname(request):
     if request.user.is_authenticated:
         if request.user.is_staff:
             user = request.user
-            getdomain = domains.objects.filter(user=user).order_by('-id')
-
+           
             if request.method == 'POST':
                 fm = userchform(request.POST, instance=request.user)
                 if fm.is_valid():
@@ -105,7 +103,7 @@ def chuname(request):
 
             else:
                 fm = userchform(instance=request.user)
-            return render(request, 'admin/chuname.html', {'form': fm, 'domains': getdomain})
+            return render(request, 'admin/chuname.html', {'form': fm})
         
         else:
             return render(request, '404.html')
@@ -117,7 +115,7 @@ def chpass(request):
     if request.user.is_authenticated:
         if request.user.is_staff:
             user = request.user
-            getdomain = domains.objects.filter(user=user).order_by('-id')
+            
 
             if request.method == 'POST':
                 form = chpassform(user=request.user, data=request.POST)
@@ -128,7 +126,7 @@ def chpass(request):
                     return redirect('/admin/account')
             else:
                 form = chpassform(user=request.user)
-            return render(request, 'admin/chpass.html', {'form': form, 'domains': getdomain})
+            return render(request, 'admin/chpass.html', {'form': form})
         
         else:
             return render(request, '404.html')
@@ -141,7 +139,7 @@ def editprofile(request):
     if request.user.is_authenticated:
         if request.user.is_staff:
             user = request.user
-            getdomain = domains.objects.filter(user=user).order_by('-id')
+           
 
             if request.method == 'POST':
                 form = profileform(request.POST, instance=request.user)
@@ -155,7 +153,7 @@ def editprofile(request):
             else:
                 form = profileform(instance=request.user)
                 form1 = usrinfoform(instance=request.user.userinfo)
-            return render(request, 'admin/editprofile.html', {'form': form, 'form1': form1, 'domains': getdomain})
+            return render(request, 'admin/editprofile.html', {'form': form, 'form1': form1})
         
         else:
             return render(request, '404.html')
@@ -170,7 +168,7 @@ def admin_update_fun(request):
     if request.user.is_authenticated:
         if request.user.is_superuser:
             user = request.user
-            getdomain = domains.objects.filter(user=user).order_by('-id')
+            
 
             if request.method == 'POST':
                 form = custom_admin_upadte(request.POST)
@@ -183,7 +181,7 @@ def admin_update_fun(request):
 
             else:
                 form = custom_admin_upadte()
-            return render(request, 'admin/admin_update.html', {'form': form, 'domains': getdomain,})
+            return render(request, 'admin/admin_update.html', {'form': form})
 
         else:
             return render(request, '404.html')

@@ -1,6 +1,7 @@
 from django import template
 
 from bigsansar.contrib.advance.models import SidebarSettings
+from bigsansar.contrib.sites.models import domains
 
 
 register = template.Library()
@@ -36,3 +37,25 @@ def post_is_sidebar_open(context):
             return ''
     else:
         return ''
+    
+
+
+@register.simple_tag(takes_context=True)
+def host_for_nav(context):
+    try:
+
+        id = context['request'].META['PATH_INFO'].split("/")[4]
+        ruser = context['request'].user
+    except:
+        return ''
+    
+    else:
+        get_host = domains.objects.get(id=id, user=ruser)
+        return get_host
+    
+
+@register.simple_tag(takes_context=True)
+def domain_list_for_nav(context):
+    user = context['request'].user
+    domain = domains.objects.filter(user=user).order_by('-id')
+    return domain
