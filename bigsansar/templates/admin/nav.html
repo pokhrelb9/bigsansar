@@ -56,8 +56,8 @@
 }
 
 .sidenav-menu-heading {
-    padding: 1.75rem 1rem 0.75rem;
-    font-size: 0.7rem;
+    padding: 0.05rem 1rem 0.05rem;
+    font-size: 0.75rem;
     font-weight: bold;
     text-transform: uppercase;
     letter-spacing: 0.05em;
@@ -92,18 +92,17 @@
     {% endfor %}
     </select>
     
-    <hr/>
     {% host_for_nav as per_domain %}
     {% if per_domain %}
-
+    <hr/>
     <a href="/admin/dashboard">Dashboard</a>
     <a href="/admin/changeuname">Change Username</a>
     <a href="">Settings</a>
 
-    {% else %}
-    <p>dfdfdsf</p>
-
     {% endif %}
+    <hr/>
+    <div class="sidenav-menu-heading">CLOUDFLARE</div>
+    <a href="">ssl</a>
     {% endif %}
 </div>
 
