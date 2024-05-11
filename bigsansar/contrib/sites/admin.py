@@ -48,3 +48,5 @@ class pageadmin(admin.ModelAdmin):
 
 
 admin.site.register(pages, pageadmin)
+
+admin.site.register(domains)

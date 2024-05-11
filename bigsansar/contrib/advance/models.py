@@ -32,3 +32,14 @@ class SidebarSettings(models.Model):
 
     def __str__(self):
         return "Sidebar Settings"
+    
+
+
+class cloudflare_api(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    global_api_key = models.CharField(max_length=500)
+    email = models.EmailField()
+    main_domain_name = models.CharField(max_length=100)
+    account_id = models.CharField(max_length=500)
+    ip_address = models.GenericIPAddressField(default='127.0.0.1')
+    ip_address2 = models.GenericIPAddressField(default='127.0.0.2')

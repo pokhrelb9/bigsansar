@@ -1,7 +1,7 @@
-# from django.contrib import admin
+from django.contrib import admin
 
-# from bigsansar.contrib.advance.models import SidebarSettings
+from bigsansar.contrib.advance.models import cloudflare_api
 
-# # Register your models ha
+# Register your models ha
 
-# admin.site.register(SidebarSettings)
+admin.site.register(cloudflare_api)

@@ -72,9 +72,14 @@ DATABASES = {
 
     ssl_cert_snakeoil = 'ssl/ssl-cert-snakeoil.key'
     ssl_cert_pem = 'ssl/ssl-cert-snakeoil.pem'
+    ssl_req_csr = 'ssl/server.csr'
     full_url_for_cert_key = os.path.join(BASE_DIR, ssl_cert_snakeoil)
     get_pem_cert_url = os.path.join(BASE_DIR, ssl_cert_pem)
-    os.system('sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout %s -out %s' % (full_url_for_cert_key, get_pem_cert_url))
+    get_req_csr = os.path.join(BASE_DIR, ssl_req_csr)
+    os.system(f'sudo openssl genrsa -out {full_url_for_cert_key} 2048')
+    os.system(f'sudo openssl req -new -key server.key -out {get_req_csr}')
+    os.system(f'sudo openssl x509 -req -days 365 -in {get_req_csr} -signkey {full_url_for_cert_key} -out {get_pem_cert_url}')
+    #os.system('sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout %s -out %s' % (full_url_for_cert_key, get_pem_cert_url))
     os.system('sudo chown -R www-data %s && sudo chmod -R 775 %s' % (BASE_DIR, BASE_DIR))
 
     # for main setting of apache2

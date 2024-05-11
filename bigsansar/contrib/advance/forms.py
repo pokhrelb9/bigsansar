@@ -3,7 +3,7 @@ from django.contrib.auth.forms import AuthenticationForm, PasswordResetForm, Set
 from django.core.validators import RegexValidator
 from django.contrib.auth.models import User
 from phonenumber_field.formfields import PhoneNumberField
-from bigsansar.contrib.advance.models import admin_update
+from bigsansar.contrib.advance.models import admin_update, cloudflare_api
 from bigsansar.contrib.account.models import userinfo
 
 
@@ -72,3 +72,25 @@ class custom_admin_upadte(forms.ModelForm):
     class Meta:
         model = admin_update
         fields = ('title', 'url',)
+
+
+class cf_api_key(forms.ModelForm):
+    email = forms.EmailField(widget=forms.TextInput(attrs={'autofocus': True, 'class': 'form-control', }))
+    global_api_key = forms.CharField(widget=forms.TextInput(attrs={'autofocus': True, 'class': 'form-control', }))
+
+    class Meta:
+        model = cloudflare_api
+        fields = ('email', 'global_api_key',)
+
+
+class cf_hostname(forms.ModelForm):
+    main_domain_name = forms.CharField(max_length=100, min_length=3, validators=[
+        RegexValidator('^[a-z0-9.]+\.[a-z0-9]{1,5}$', message='Please enter your correct domain name')],
+                             widget=forms.TextInput(attrs={'autofocus': True, 'class': 'form-control', }))
+    account_id = forms.CharField(widget=forms.TextInput(attrs={'autofocus': True, 'class': 'form-control', }))
+    ip_address = forms.GenericIPAddressField(widget=forms.TextInput(attrs={'autofocus': True, 'class': 'form-control', }))
+    ip_address2 = forms.GenericIPAddressField(widget=forms.TextInput(attrs={'autofocus': True, 'class': 'form-control', }))
+
+    class Meta:
+        model = cloudflare_api
+        fields = ('main_domain_name', 'account_id','ip_address','ip_address2',)

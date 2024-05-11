@@ -17,7 +17,7 @@ class domains(models.Model):
     publish_date = models.DateField(auto_now_add=True)
     visitor = models.IntegerField(default=1)
     primary_domaIn = models.BooleanField(default=False)
-    
+    zone_id = models.CharField(max_length=1000, default='')
 
     def __str__(self):
         return self.domain

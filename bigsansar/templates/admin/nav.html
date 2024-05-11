@@ -100,9 +100,11 @@
     <a href="">Settings</a>
 
     {% endif %}
+    {% endif %}
+    {% if user.is_superuser %}
     <hr/>
-    <div class="sidenav-menu-heading">CLOUDFLARE</div>
-    <a href="">ssl</a>
+    <div class="sidenav-menu-heading">Global Settings </div>
+    <a href="/admin/cf/">Cloudflare</a>
     {% endif %}
 </div>
 

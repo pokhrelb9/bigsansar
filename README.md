@@ -1,4 +1,5 @@
 ## New update
+* Working in to cloudflare 
 * fixed some bugs
 * added new db table for nav always open or close.
 * now you can install bigsansar package in to ubuntu and all setup with on command lines
@@ -43,7 +44,7 @@ this is work only on ubuntu os
 2) type ` python manage.py setup_server` commend for fully setup into server .
 
 [How to Setup a Full Server with BigSansar, Django, and Ubuntu
-](https://youtu.be/iEmI0HO_U0E)
+](https://youtu.be/j8YN6x9XdR4)
 
 # some usefull link 
 [sitemap.xml](http://localhost/sitemap.xml)

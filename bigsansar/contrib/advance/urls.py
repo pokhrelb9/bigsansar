@@ -14,5 +14,6 @@ urlpatterns = [
     path('account/edit', views.editprofile, name='editprofile'),
     path('domain/', include('bigsansar.contrib.sites.urls')),
     path('notify/update', views.admin_update_fun, name='admin update fun'),
+    path('cf/', include("bigsansar.contrib.advance.cf_url")),
     
 ]
