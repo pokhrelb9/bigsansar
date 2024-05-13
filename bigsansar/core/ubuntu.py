@@ -54,6 +54,22 @@ DATABASES = {
             
     
 
+    locssl = "www/settings.py"
+        # Text to be deleted
+    sslredirect = '''#SECURE_SSL_REDIRECT = True'''
+
+        # Read the content of the file
+    with open(locssl, 'r') as file:
+            ct = file.read()
+
+        # Remove the specified text
+    modified_content11 = ct.replace(sslredirect, 'SECURE_SSL_REDIRECT = True')
+
+        # Write the modified content back to the file
+    with open(locssl, 'w') as file:
+            file.write(modified_content11)
+            
+
     os.system('sudo apt update  && sudo apt upgrade -y')
 
     print('we are installing some ubuntu package for configurations....')
@@ -77,7 +93,7 @@ DATABASES = {
     get_pem_cert_url = os.path.join(BASE_DIR, ssl_cert_pem)
     get_req_csr = os.path.join(BASE_DIR, ssl_req_csr)
     os.system(f'sudo openssl genrsa -out {full_url_for_cert_key} 2048')
-    os.system(f'sudo openssl req -new -key server.key -out {get_req_csr}')
+    os.system(f'sudo openssl req -new -key {full_url_for_cert_key} -out {get_req_csr}')
     os.system(f'sudo openssl x509 -req -days 365 -in {get_req_csr} -signkey {full_url_for_cert_key} -out {get_pem_cert_url}')
     #os.system('sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout %s -out %s' % (full_url_for_cert_key, get_pem_cert_url))
     os.system('sudo chown -R www-data %s && sudo chmod -R 775 %s' % (BASE_DIR, BASE_DIR))

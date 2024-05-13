@@ -222,9 +222,9 @@ def cloudflare(request):
                     ns = response.json()['result']['name_servers']
                     return render(request, 'admin/cloudflare.html', {'cf': query, 'ssl_value': get_ssl_status, 'status': response.json()['result']['status'], 'name_servers1': ns[0], 'name_servers2': ns[1]})
                 else:
-                    return JsonResponse({'error': 'Failed to retrieve Cloudflare nameservers.'}, status=500)
+                    return render(request, 'admin/db_cloudflare.html')
             except:
-                return render(request, 'admin/cloudflare.html')
+                return render(request, 'admin/db_cloudflare.html')
             
         else:
             return render(request, '404.html')
@@ -350,15 +350,24 @@ def cf_main_domain(request):
                                 cloudflare_api.objects.update_or_create(defaults={'user': user, 'main_domain_name': zone, 'account_id': account_id, 'ip_address':
                                                                                             ip1, 'ip_address2': ip2})
                                                                                              
-                                domains.objects.create(user=request.user, domain=zone, Description=zone, zone_id=zone_id)
-                            
+                                
+                                domains.objects.create(user=user, domain=zone, Description=zone, zone_id=zone_id)
+                                
                                 #get_id = domains.objects.get(user=user, domain=zone).id
                                 messages.success(request, 'updated Successfully Created')
                                 return redirect(f'/admin/cf/')
                         
                             else:
-                                messages.warning(request, f"'error': 'Failed to add ip address to the {zone}'")
-                                return render(request, 'admin/cf_config.html', {'head': form_title, 'form': form})
+                                cloudflare_api.objects.update_or_create(defaults={'user': user, 'main_domain_name': zone, 'account_id': account_id, 'ip_address':
+                                                                                            ip1, 'ip_address2': ip2})
+                                try:
+                                    
+                                    domains.objects.create(user=user, domain=zone, Description=zone, zone_id=zone_id)
+                                except:
+                                    domains.objects.filter(user=user, domain=zone).update(zone_id=zone_id)
+
+                                messages.success(request, 'updated Successfully Created')
+                                return redirect(f'/admin/cf/')
                             
                         
                         else:
@@ -418,9 +427,12 @@ def cf_main_domain(request):
 def ssl_origin(request):
     if request.user.is_authenticated:
         if request.user.is_superuser:
-            get_zone_id = domains.objects.get(domain=query.main_domain_name).zone_id
-            
             query = cloudflare_api.objects.latest('id')
+            get_domain_query = domains.objects.get(domain=query.main_domain_name)
+            get_zone_id = get_domain_query.zone_id
+            
+            doamin_name = get_domain_query.domain
+            
             headers = {
                             'Content-Type': 'application/json',
                             'X-Auth-Email': query.email,
@@ -435,47 +447,40 @@ def ssl_origin(request):
             response = requests.patch(url, json=data, headers=headers)
             if response.status_code == 200:
                 
-                url_for_cert = f"https://api.cloudflare.com/client/v4/zones/{get_zone_id}/ssl/certificate/packs"
-                # # Certificate and private key files
-                certificate_path = BASE_DIR / 'ssl/ssl-cert-snakeoil.pem'
-                # private_key_path = BASE_DIR / 'ssl/ssl-cert-snakeoil.key'
+                url_for_cert = f"https://api.cloudflare.com/client/v4/certificates"
 
-                #  # Read certificate and private key contents
-                with open(certificate_path, "r") as cert_file:
-                    certificate = cert_file.read()
-                # with open(private_key_path, "r") as key_file:
-                #     private_key = key_file.read()
-
+                hostnames = [f"{doamin_name}", f"*.{doamin_name}"]
+                csr_path = BASE_DIR / 'ssl/server.csr'
+                # Read certificate and private key contents
+                with open(csr_path, "r") as pem_file:
+                    csr = pem_file.read()
 
                 # data = {
-                #     "certificate": certificate,
-                #     "private_key": private_key,
-                #     "bundle_method": "ubiquitous"
-                # }
-                hostnames = ["bigsansar.com", "*.bigsansar.com"]
-
+                #         "certificate_request": csr,
+                #         "hostnames": hostnames,
+                #         "requested_validity": 5475  # Validity in days (15 years)
+                #     }
                 data = {
-                        "certificate_request": certificate,
+                        "csr": f"{csr}",
                         "hostnames": hostnames,
-                        "requested_validity": 5475  # Validity in days (15 years)
+                        "request_type": "origin-rsa",
+                        "requested_validity": 5475
                     }
                 
-
-    #             data = {
-    #     "csr": "-----BEGIN CERTIFICATE REQUEST-----\nMIICxzCCAa8CAQAwSDELMAkGA1UEBhMCVVMxFjAUBgNVBAgTDVNhbiBGcmFuY2lz\nY28xCzAJBgNVBAcTAkNBMRQwEgYDVQQDEwtleGFtcGxlLm5ldDCCASIwDQYJKoZI\nhvcNAQEBBQADggEPADCCAQoCggEBALxejtu4b+jPdFeFi6OUsye8TYJQBm3WfCvL\nHu5EvijMO/4Z2TImwASbwUF7Ir8OLgH+mGlQZeqyNvGoSOMEaZVXcYfpR1hlVak8\n4GGVr+04IGfOCqaBokaBFIwzclGZbzKmLGwIQioNxGfqFm6RGYGA3be2Je2iseBc\nN8GV1wYmvYE0RR+yWweJCTJ157exyRzu7sVxaEW9F87zBQLyOnwXc64rflXslRqi\ng7F7w5IaQYOl8yvmk/jEPCAha7fkiUfEpj4N12+oPRiMvleJF98chxjD4MH39c5I\nuOslULhrWunfh7GB1jwWNA9y44H0snrf+xvoy2TcHmxvma9Eln8CAwEAAaA6MDgG\nCSqGSIb3DQEJDjErMCkwJwYDVR0RBCAwHoILZXhhbXBsZS5uZXSCD3d3dy5leGFt\ncGxlLm5ldDANBgkqhkiG9w0BAQsFAAOCAQEAcBaX6dOnI8ncARrI9ZSF2AJX+8mx\npTHY2+Y2C0VvrVDGMtbBRH8R9yMbqWtlxeeNGf//LeMkSKSFa4kbpdx226lfui8/\nauRDBTJGx2R1ccUxmLZXx4my0W5iIMxunu+kez+BDlu7bTT2io0uXMRHue4i6quH\nyc5ibxvbJMjR7dqbcanVE10/34oprzXQsJ/VmSuZNXtjbtSKDlmcpw6To/eeAJ+J\nhXykcUihvHyG4A1m2R6qpANBjnA0pHexfwM/SgfzvpbvUg0T1ubmer8BgTwCKIWs\ndcWYTthM51JIqRBfNqy4QcBnX+GY05yltEEswQI55wdiS3CjTTA67sdbcQ==\n-----END CERTIFICATE REQUEST-----",
-    #     "hostnames": [
-    #         "bigsansar.com",
-    #         "*.bigsansar.com"
-    #     ],
-    #     "request_type": "origin-rsa",
-    #     "requested_validity": 5475
-    # }
                 response2 = requests.post(url_for_cert, json=data, headers=headers)
                 if response2.status_code == 200:
                     data = response2.json()
-                    return JsonResponse(data)
+                    # Get the certificate value from the response JSON
+                    certificate = data.get('result', {}).get('certificate')
+                    # Save certificate to a PEM file
+                    pem_filename = BASE_DIR / 'ssl/ssl-cert-snakeoil.pem'
+                    with open(pem_filename, 'w') as pem_file:
+                        pem_file.write(certificate)
+                    messages.success(request, 'Certificate updated Successfully')
+                    return redirect(f'/admin/cf/')
+                
                 else:
-                    return JsonResponse({'error': 'Failed to u.'}, status=500)
+                    return JsonResponse({'error': 'Certificate not found in the response JSON.'}, status=400)
                 
                 #return redirect('/admin/cf/')
             else:

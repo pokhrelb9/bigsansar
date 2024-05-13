@@ -1,8 +1,9 @@
 ## New update
+* fixed some bug in cloudflare api
 * Working in to cloudflare 
 * fixed some bugs
 * added new db table for nav always open or close.
-* now you can install bigsansar package in to ubuntu and all setup with on command lines
+
 
 # How to get Bigsansar
 
