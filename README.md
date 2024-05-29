@@ -1,8 +1,9 @@
 ## New update
+* added tutorial about create unlimited users automatically.
 * fixed some bug in cloudflare api
 * Working in to cloudflare 
 * fixed some bugs
-* added new db table for nav always open or close.
+
 
 
 # How to get Bigsansar
@@ -61,7 +62,10 @@ create a page **slug** name with sitemap,script , styles
 go to **VirtualHost.py** file and change **localhost** with your subdomain 
 ## Some usefull commands:
 
-`python3 manage.py createuser` - get unlimited users.
+`python manage.py createuser` - get unlimited users.
+
+[Get UNLIMITED Django Users Automatically with BigSansar
+](https://youtu.be/UW0ytkPAMxw)
 
 ## templatetags for extends and include 
 
