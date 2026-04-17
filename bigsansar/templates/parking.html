@@ -1,0 +1,34 @@
+
+{% extends 'base.html' %}
+
+{% block head %}
+<style>
+body
+{
+  padding-top: 10%;
+  background: #eee;
+}
+</style>
+{% endblock %}
+
+{% block body %}
+
+<div class="container">
+  <div class="card text-center">
+  <div class="card-header">
+    Free Website and Hosting
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">Welcome {{ domain }}</h5>
+    <p class="card-text">Build one in minutes with bigsansar - a visual site building tool!
+    <br/>This domain is Parked with Bigsansar. If this is your domain, please register first.
+</p>
+    <a href="https://bigsansar.com" class="btn btn-primary">Start With Free</a>
+  </div>
+  <div class="card-footer text-muted">
+    {{ time }}
+  </div>
+</div>
+</div>
+
+{% endblock %}

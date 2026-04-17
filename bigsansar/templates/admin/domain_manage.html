@@ -1,0 +1,265 @@
+{% extends 'base.html' %}
+{%block title %} bigsansar - dashboard {% endblock %}
+
+{% block head %}
+
+<!-- Font Awesome Icon Library -->
+<style>
+.checked {
+  color: orange;
+}
+</style>
+
+{% load static %}
+<link rel="stylesheet" href="{% static 'style.css' %}">
+{% endblock %}
+
+{% block body %}
+{% include 'admin/nav.html' %}
+
+<div class="container">
+	<div class="main-body">
+
+		{% if messages %}
+		{% for message in messages %}
+		{% if message.tags %}
+		<div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+			{{ message }}
+			<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+			</button>
+		</div>
+		{% endif %}
+		{% endfor %}
+		{% endif %}
+		<!-- Breadcrumb -->
+
+			<nav aria-label="breadcrumb" class="main-breadcrumb">
+			  <ol class="breadcrumb">
+				<li class="breadcrumb-item"><a href="/">Home</a></li>
+				  <li class="breadcrumb-item"><a href="/admin/account">Account</a></li>
+				<li class="breadcrumb-item active" aria-current="page">{{ host.domain }}</li>
+			  </ol>
+			</nav>
+
+		<!-- /Breadcrumb -->
+
+		<div class="row gutters-sm">
+			<div class="col-md-4 mb-3">
+				<div class="card">
+					<div class="card-body">
+						<div class="d-flex flex-column align-items-center text-center">
+							<img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin" class="rounded-circle" width="150">
+							<div class="mt-3">
+								<h4>{{ request.user }}</h4>
+
+								<p class="text-muted font-size-sm">{{ request.user.userinfo.address }}</p>
+								{% if request.user.is_staff %}
+                      <a href="/admin/bpanel" class="btn btn-outline-primary" role="button" target="__blank" aria-pressed="true">Admin Panel</a>
+	                            {% endif %}</div>
+						</div>
+					</div>
+				</div>
+				<div class="card mt-3">
+					<ul class="list-group list-group-flush">
+						<li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+							<h6 class="mb-0">Registerd on</h6>
+							<span class="text-secondary">{{ request.user.date_joined }}</span>
+						</li>
+						<li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+							<h6 class="mb-0">Last login</h6>
+							<span class="text-secondary">{{ request.user.last_login }}</span>
+						</li>
+						<li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+							<h6 class="mb-0">Login IP</h6>
+							<span class="text-secondary">{{ ip }}</span>
+						</li>
+						<li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+							<h6 class="mb-0">IP Location</h6>
+							<span class="text-secondary">{{ geo.country }}</span>
+						</li>
+						<li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+							<h6 class="mb-0">Browser</h6>
+							<span class="text-secondary">{{ browser }}</span>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div class="col-md-8">
+				<div class="card mb-3">
+					<div class="card-body">
+						<div class="row">
+							<div class="col-sm-3">
+								<h6 class="mb-0">Domain Name</h6>
+							</div>
+							<div class="col-sm-9 text-secondary">
+								<a href="http://{{ host.domain }}" target="_blank">{{ host.domain }}</a>
+							</div>
+						</div>
+						<hr>
+						<div class="row">
+							<div class="col-sm-3">
+								<h6 class="mb-0">Total visitor</h6>
+							</div>
+							<div class="col-sm-9 text-secondary">
+								{{ visitcount }}  (<a href="/about-visitor">?</a>)
+							</div>
+						</div>
+						<hr>
+						<div class="row">
+							<div class="col-sm-3">
+								<h6 class="mb-0"> Reviews</h6>
+							</div>
+							<div class="col-sm-9 text-secondary">
+								{% if visitcount == 0 %}
+								<span class="fa fa-star"></span>
+								<span class="fa fa-star"></span>
+								<span class="fa fa-star"></span>
+								<span class="fa fa-star"></span>
+								<span class="fa fa-star"></span>
+								{% elif visitcount < 500 %}
+								<span class="fa fa-star checked"></span>
+								<span class="fa fa-star"></span>
+								<span class="fa fa-star"></span>
+								<span class="fa fa-star"></span>
+								<span class="fa fa-star"></span>
+
+								{% elif visitcount < 1000 %}
+								<span class="fa fa-star checked"></span>
+								<span class="fa fa-star checked"></span>
+								<span class="fa fa-star"></span>
+								<span class="fa fa-star"></span>
+								<span class="fa fa-star"></span>
+
+								{% elif visitcount < 5000 %}
+								<span class="fa fa-star checked"></span>
+								<span class="fa fa-star checked"></span>
+								<span class="fa fa-star checked"></span>
+								<span class="fa fa-star"></span>
+								<span class="fa fa-star"></span>
+
+								{% elif visitcount < 10000 %}
+								<span class="fa fa-star checked"></span>
+								<span class="fa fa-star checked"></span>
+								<span class="fa fa-star checked"></span>
+								<span class="fa fa-star checked"></span>
+								<span class="fa fa-star"></span>
+
+								{% elif visitcount < 25000 %}
+								<span class="fa fa-star checked"></span>
+								<span class="fa fa-star checked"></span>
+								<span class="fa fa-star checked"></span>
+								<span class="fa fa-star checked"></span>
+								<span class="fa fa-star checked"></span>
+
+								{% else %}
+								<span class="fa fa-star checked"></span>
+								<span class="fa fa-star checked"></span>
+								<span class="fa fa-star checked"></span>
+								<span class="fa fa-star checked"></span>
+								<span class="fa fa-star checked"></span> + <span class="fa fa-star checked"></span>
+								{% endif %}
+
+							</div>
+						</div>
+						<hr>
+						<div class="row">
+							<div class="col-sm-3">
+								<h6 class="mb-0">Status</h6>
+							</div>
+							<div class="col-sm-9 text-secondary">
+								{{ count }}
+							</div>
+						</div>
+						<hr>
+						<div class="row">
+							<div class="col-sm-3">
+								<h6 class="mb-0">Created on</h6>
+							</div>
+							<div class="col-sm-9 text-secondary">
+								{{ host.publish_date }}
+							</div>
+						</div>
+						<hr>
+						<div class="row">
+							<div class="col-sm-12">
+								<a class="btn btn-info " href="{{ host.id }}/edit">Edit</a>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="row gutters-sm">
+					<div class="col-sm-6 mb-3">
+						<div class="card h-100">
+							<div class="card-body">
+								<table class='table table-borderless'><tr><th class='text-left'>
+									<h6 class="d-flex align-items-center mb-3"><i class="material-icons text-info me-2">{{ host.domain }}</i>pages Status</h6>
+								</th><th class='text-right'><a href='{{ host.id }}/pages/create' class='btn btn-primary btn-sm' role='button'><b>+ New</b></a></th>
+								</tr>
+								</table>
+								<hr/>
+								{% for page in pages %}
+									<table class='table table-borderless'>
+
+										<tr>
+											<th style="text-align:left">
+												<a href="{{ host.id }}/pages/{{ page.id }}/edit" style="text-decoration:none;">{{ page.title }}</a>
+											</th>
+											<th style="text-align:right">
+												<a href="http://{{ host.domain }}/{{ page.slug }}" target="_blank"><i class="fa fa-eye" aria-hidden="true"></i></a>
+												<a href="{{ host.id }}/pages/{{ page.id }}/delete"> <i class="fa fa-trash" aria-hidden="true"></i> </a>
+											</th>
+
+										</tr>
+
+									</table>
+									<hr/>
+								{% endfor %}
+
+								<nav aria-label="Page navigation example">
+									<ul class="pagination justify-content-center">
+										{% if pages.has_previous %}
+											<li class="page-item"><a class="page-link" href="?page=1">First</a></li>
+											<li class="page-item">
+												<a href="?page={{ pages.previous_page_number }}" class="page-link">Previous</a>
+											</li>
+										{% endif %}
+
+										{% if pages.has_next %}
+											<li class="page-item"><a class="page-link" href="?page={{ pages.next_page_number }}">Next</a></li>
+											<li class="page-item">
+												<a class="page-link" href="?page={{ pages.paginator.num_pages }}">Last</a>
+											</li>
+										{% endif %}
+									</ul>
+									<p style="text-align:center" >
+                                        Page {{ pages.number }} of {{ pages.paginator.num_pages }}.
+                                    </p>
+								</nav>
+
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-6 mb-3">
+						<div class="card h-100">
+							<div class="card-body">
+								<h6 class="d-flex align-items-center mb-3"><i class="material-icons text-info me-2">Bigsansar</i>New Update</h6><hr/>
+								{% for update in blog %}
+
+								<small><a style="text-decoration:none;" href="{{ update.url }}" target="_blank">{{ update.title }}</a></small><hr/>
+
+								{% endfor %}
+							</div>
+						</div>
+					</div>
+				</div>
+
+
+
+			</div>
+		</div>
+
+	</div>
+</div>
+
+{% endblock %}

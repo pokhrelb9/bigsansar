@@ -1,0 +1,6 @@
+django
+django-phonenumber-field[phonenumberslite]
+django-ckeditor
+requests
+pillow
+fontawesomefree

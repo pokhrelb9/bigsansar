@@ -1,0 +1,211 @@
+
+    
+    <style>
+        body {
+            padding-top: 56px; /* Adjust based on your fixed-top navbar height */
+        }
+
+        .sidebar {
+            height: 100%;
+            width: 0;
+            position: fixed;
+            z-index: 1;
+            top: 0;
+            left: 0;
+            background-color: #343a40; /* Dark background color */
+            overflow-x: hidden;
+            transition: 0.5s;
+            padding-top: 60px; /* Adjust based on your fixed-top navbar height */
+        }
+
+        .sidebar a {
+            padding: 10px 15px;
+            text-decoration: none;
+            font-size: 18px;
+            color: #f9f6f6;
+            display: block;
+            transition: 0.3s;
+        }
+
+        .sidebar a:hover {
+            color: #f1f1f1;
+        }
+
+        .sidebar .closebtn {
+            position: absolute;
+            top: 0;
+            left: 0;
+            font-size: 36px;
+            margin-left: 50px;
+        }
+
+        .content {
+            transition: margin-left .5s;
+            padding: 16px;
+        }
+
+
+    select {
+    font-size: 0.9rem;
+    padding: 2px 5px;
+    }
+
+    hr {
+   
+    color: white;
+}
+
+.sidenav-menu-heading {
+    padding: 0.05rem 1rem 0.05rem;
+    font-size: 0.75rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #fff;
+}
+    </style>
+</head>
+<body>
+    {% if user.is_staff %}
+    {% load nav_bar %}
+    {% post_is_sidebar_open %}
+
+   
+
+<div id="mySidebar" class="sidebar">
+    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+    <form method="post" action="" id="nav_form">
+        {% csrf_token %}
+        <input type="hidden" name="nav_true" value="False"></input>
+        <button type="submit" class="btn-close btn-close-white me-md-2" aria-label="Close"></button>
+    </form>
+   </div>
+    <div class="sidenav-menu-heading">Websites</div>
+    <select onChange="window.location.href=this.value" class="form-select form-select-lg mb-3" aria-label="Large select example">
+        
+    <option selected>{% host_for_nav %} </option>
+    <hr/>
+    
+    {% domain_list_for_nav as domains %}
+    {% for domains in domains %}
+    <option value="/admin/domain/manage/{{ domains.id }}">{{ domains.domain }}</option>
+    {% endfor %}
+    </select>
+    
+    {% host_for_nav as per_domain %}
+    {% if per_domain %}
+    <hr/>
+    <a href="/admin/dashboard">Dashboard</a>
+    <a href="/admin/changeuname">Change Username</a>
+    <a href="">Settings</a>
+
+    {% endif %}
+    {% endif %}
+    {% if user.is_superuser %}
+    <hr/>
+    <div class="sidenav-menu-heading">Global Settings </div>
+    <a href="/admin/cf/">Cloudflare</a>
+    {% endif %}
+</div>
+
+<div id="main" class="content">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+
+	<div class="container-fluid">
+		{% if user.is_staff %}
+       
+        <form method="post" action="" >
+            {% csrf_token %}
+            <input type="hidden" name="nav_true" value="True"></input>
+            <button type="submit" class="btn navbar-toggler-icon"></button>
+        </form>
+        
+        {% else %}
+
+        {% endif %}
+
+		{% load static %}
+		<a href="/admin" class="navbar-brand">
+			<img src="{% static 'logo.png' %}" width="30" height="30" class="d-inline-block align-top" alt="">
+			BIGSANSAR
+		</a>
+		<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+			<ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+				<form class="d-flex" action="http://google.com/search">
+					<input type="hidden" name="sitesearch" value="bigsansar.com">
+					<br/>
+					<input class="form-control me-2" type="search" name="q" placeholder="Search" aria-label="Search">
+					<button class="btn btn-outline-success" type="submit">Search</button>
+				</form>
+				{% if user.is_authenticated %}
+
+				<li class="nav-item dropdown" >
+					<a class="nav-link dropdown-toggle active" href="#" role="button" id="navbarDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						{{ request.user }}
+					</a>
+					<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+						<li>
+							<a class="dropdown-item" href="/admin/account">Account</a>
+						</li>
+						<li>
+							<a class="dropdown-item" href="/admin/changeuname">Change Username</a>
+						</li>
+
+						<li>
+							<hr class="dropdown-divider">
+						</li>
+						<li>
+							<a class="dropdown-item" href="/admin/changepass">Change Password</a>
+						</li>
+
+					</ul>
+				</li>
+				<li class="nav-item active">
+					<a href="/admin/logout" class="nav-item nav-link active">
+						<i class="fa fa-sign-out" aria-hidden="true"></i>LOGOUT
+					</a>
+				</li>
+
+				{% else %}
+				<li class="nav-item active">
+					<a href="/admin" class="nav-item nav-link active">
+						<i class="fa fa-sign-in" aria-hidden="true"></i>
+						LOGIN
+					</a>
+				</li>
+				{% endif %}
+			</ul>
+		</div>
+	</div>
+</nav>
+</div>
+{% if user.is_staff %}
+{% load nav_bar %}
+{% get_is_sidebar_open as nav_ff %} 
+{% endif %}
+<script>
+    // Retrieve the boolean value directly from Django variable
+    const isSidebarOpen = JSON.parse('{{ nav_ff.is_sidebar_open|yesno:"true,false" }}');
+    
+    // Function to toggle sidebar based on database boolean value
+    function toggleSidebar() {
+        const sidebar = document.getElementById("mySidebar");
+        const mainContent = document.getElementById("main");
+
+        if (isSidebarOpen) {
+            sidebar.style.width = "250px";
+            mainContent.style.marginLeft = "250px";
+        } else {
+            
+            sidebar.style.width = "0";
+            mainContent.style.marginLeft = "0";
+        }
+    }
+
+    // Call the toggleSidebar function when the page loads
+    window.onload = toggleSidebar;
+</script>

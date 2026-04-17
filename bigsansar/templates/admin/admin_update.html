@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block head %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'style.css' %}">
+{% endblock %}
+
+{% block body %}
+{% include 'admin/nav.html' %}
+
+<div class="wrapper">
+    <form class="form" method="post" action="" >
+        <h2 class="form-heading text-center">Update Information</h2><br/>
+        {% csrf_token %}
+        {{form.as_p}}
+        {{form1.as_p}}
+        <button type="submit" class="btn btn-lg btn-primary btn-block">Submit</button>
+    </form>
+</div>
+
+{% endblock %}

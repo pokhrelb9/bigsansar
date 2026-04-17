@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{%block title %} bigsansar - Cloudflare configrations {% endblock %}
+{% block head %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'style.css' %}">
+{% endblock %}
+{% block body %}
+{% include 'admin/nav.html' %}
+
+<style>
+    .info-box {
+        background-color: #f8f9fa;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        margin: 20px auto;
+        max-width: 400px;
+        text-align: center;
+    }
+
+    
+</style>
+</head>
+<body>
+    
+   
+
+<div id="info-box" class="info-box">
+   
+    <br/>
+    <br/>
+    <div class="row">
+        <div class="col-sm-3">
+            <h6 class="mb-0">Email</h6>
+        </div>
+        <div class="col-sm-9 text-secondary">
+            {{ cf.email }}
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-sm-3">
+            <h6 class="mb-0"> Domain </h6>
+        </div>
+        <div class="col-sm-9 text-secondary">
+            {{ cf.main_domain_name }}
+        </div>
+        
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-sm-3">
+            <h6 class="mb-0"> Ip Address </h6>
+        </div>
+        <div class="col-sm-9 text-secondary">
+            {{ cf.ip_address }}
+        </div>
+        
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-sm-3">
+            <h6 class="mb-0"> Ip Address 2 </h6>
+        </div>
+        <div class="col-sm-9 text-secondary">
+            {{ cf.ip_address2 }}
+        </div>
+        
+    </div>
+    <hr>
+   <br/>
+   <a class="btn btn-primary" href="/admin/cf/api_key" role="button">Link to Cloudflare</a>
+</div>
+
+
+
+{% endblock %}
